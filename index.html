@@ -1,16 +1,20 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>TecnoSoluciones | Servicios Tecnológicos</title>
-
-    <link rel="icon" href="static/img/logo.svg">
+    <title>TecnoSoluciones | Soluciones Tecnológicas</title>
 
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     >
 
     <link rel="stylesheet" href="static/css/estilos.css">
@@ -22,18 +26,12 @@
      NAVBAR
 ========================================================== -->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container">
 
-        <a class="navbar-brand d-flex align-items-center" href="#inicio">
-            <img
-                src="static/img/logo.svg"
-                alt="TecnoSoluciones"
-                width="40"
-                height="40"
-                class="me-2"
-            >
-            <strong>TecnoSoluciones</strong>
+        <a class="navbar-brand fw-bold" href="#inicio">
+            <i class="bi bi-cpu-fill me-2"></i>
+            TecnoSoluciones
         </a>
 
         <button
@@ -54,7 +52,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#nosotros">Quiénes Somos</a>
+                    <a class="nav-link" href="#nosotros">Nosotros</a>
                 </li>
 
                 <li class="nav-item">
@@ -66,7 +64,11 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#autenticacion">Usuarios</a>
+                    <a class="nav-link" href="#informacion">Información</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#usuarios">Usuarios</a>
                 </li>
 
                 <li class="nav-item">
@@ -84,94 +86,109 @@
      INICIO
 ========================================================== -->
 
-<section id="inicio" class="py-5">
+<section id="inicio" class="hero">
+
     <div class="container">
 
-        <div class="row align-items-center">
+        <div class="row align-items-center g-5">
 
-            <div class="col-md-6">
+            <div class="col-lg-7">
 
-                <h1 class="display-4 fw-bold text-primary">
-                    TecnoSoluciones
+                <span class="hero-badge">
+                    <i class="bi bi-stars me-2"></i>
+                    Tecnología para tu negocio
+                </span>
+
+                <h1>
+                    Soluciones tecnológicas
+                    <span>simples y eficientes.</span>
                 </h1>
 
-                <h2 class="mb-3">
-                    Servicios Tecnológicos
-                </h2>
-
-                <p class="lead">
-                    Soluciones digitales para empresas y personas,
-                    enfocadas en tecnología, desarrollo web,
-                    soporte técnico y capacitación.
+                <p class="hero-text">
+                    Desarrollamos soluciones digitales para mejorar la gestión,
+                    organización y crecimiento de empresas y emprendimientos.
                 </p>
 
-                <a href="#servicios" class="btn btn-primary btn-lg">
-                    Conocer servicios
-                </a>
+                <div class="hero-buttons">
+
+                    <a href="#servicios" class="btn btn-primary btn-lg">
+                        <i class="bi bi-grid me-2"></i>
+                        Ver servicios
+                    </a>
+
+                    <a href="#productos" class="btn btn-outline-light btn-lg">
+                        Conocer más
+                        <i class="bi bi-arrow-right ms-2"></i>
+                    </a>
+
+                </div>
 
             </div>
 
-            <div class="col-md-6 text-center">
+            <div class="col-lg-5">
 
-                <img
-                    src="static/img/tecnologia.svg"
-                    alt="Tecnología"
-                    class="img-fluid"
-                    style="max-height: 350px;"
-                >
+                <div class="hero-panel">
+
+                    <div class="hero-panel-icon">
+                        <i class="bi bi-cpu"></i>
+                    </div>
+
+                    <h3>Gestión inteligente</h3>
+
+                    <p>
+                        Organiza productos, proveedores, clientes y usuarios
+                        desde un solo lugar.
+                    </p>
+
+                    <div class="hero-line"></div>
+
+                    <div class="hero-small-info">
+                        <i class="bi bi-check-circle-fill"></i>
+                        Información organizada
+                    </div>
+
+                    <div class="hero-small-info">
+                        <i class="bi bi-check-circle-fill"></i>
+                        Gestión sencilla
+                    </div>
+
+                    <div class="hero-small-info">
+                        <i class="bi bi-check-circle-fill"></i>
+                        Diseño adaptable
+                    </div>
+
+                </div>
 
             </div>
 
         </div>
 
     </div>
+
 </section>
 
 
 <!-- ==========================================================
-     QUIÉNES SOMOS
+     INDICADORES
 ========================================================== -->
 
-<section id="nosotros" class="py-5 bg-light">
+<section class="indicadores">
 
     <div class="container">
 
-        <div class="text-center mb-5">
+        <div class="row g-4">
 
-            <h2 class="fw-bold text-primary">
-                Quiénes Somos
-            </h2>
+            <div class="col-md-4">
 
-            <p class="lead">
-                Tecnología al servicio de las personas y empresas.
-            </p>
+                <div class="indicador">
 
-        </div>
+                    <div class="indicador-icon">
+                        <i class="bi bi-box-seam"></i>
+                    </div>
 
-        <div class="row">
-
-            <div class="col-md-6 mb-4">
-
-                <div class="card h-100 shadow-sm border-0">
-
-                    <div class="card-body">
-
-                        <h3 class="card-title text-primary">
-                            Nuestra empresa
-                        </h3>
-
-                        <p class="card-text">
-                            TecnoSoluciones es un proyecto orientado a
-                            ofrecer servicios tecnológicos modernos,
-                            prácticos y accesibles.
-                        </p>
-
-                        <p class="card-text">
-                            Nuestro objetivo es ayudar a nuestros clientes
-                            mediante soluciones digitales que faciliten
-                            sus actividades y mejoren sus procesos.
-                        </p>
-
+                    <div>
+                        <strong id="contadorProductos">0</strong>
+                        <span>Productos registrados</span>
                     </div>
 
                 </div>
@@ -179,32 +196,103 @@
             </div>
 
 
-            <div class="col-md-6 mb-4">
+            <div class="col-md-4">
 
-                <div class="card h-100 shadow-sm border-0">
+                <div class="indicador">
 
-                    <div class="card-body">
-
-                        <h3 class="card-title text-primary">
-                            Nuestra misión
-                        </h3>
-
-                        <p class="card-text">
-                            Brindar soluciones tecnológicas confiables,
-                            funcionales y fáciles de utilizar.
-                        </p>
-
-                        <h3 class="card-title text-primary mt-4">
-                            Nuestra visión
-                        </h3>
-
-                        <p class="card-text">
-                            Ser una alternativa tecnológica para personas
-                            y empresas que necesitan mejorar sus procesos
-                            mediante herramientas digitales.
-                        </p>
-
+                    <div class="indicador-icon">
+                        <i class="bi bi-building"></i>
                     </div>
+
+                    <div>
+                        <strong id="contadorProveedores">0</strong>
+                        <span>Proveedores registrados</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="indicador">
+
+                    <div class="indicador-icon">
+                        <i class="bi bi-people"></i>
+                    </div>
+
+                    <div>
+                        <strong id="contadorClientes">0</strong>
+                        <span>Clientes registrados</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================================
+     NOSOTROS
+========================================================== -->
+
+<section id="nosotros" class="section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>QUIÉNES SOMOS</span>
+
+            <h2>Tecnología que facilita tu trabajo</h2>
+
+            <p>
+                En TecnoSoluciones buscamos brindar herramientas digitales
+                prácticas para mejorar la organización y administración
+                de la información.
+            </p>
+
+        </div>
+
+
+        <div class="row g-4 mt-4">
+
+            <div class="col-lg-6">
+
+                <div class="about-box">
+
+                    <i class="bi bi-lightbulb"></i>
+
+                    <h3>Innovación</h3>
+
+                    <p>
+                        Utilizamos herramientas tecnológicas para crear
+                        soluciones modernas, funcionales y fáciles de utilizar.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-lg-6">
+
+                <div class="about-box">
+
+                    <i class="bi bi-shield-check"></i>
+
+                    <h3>Organización</h3>
+
+                    <p>
+                        Facilitamos la administración de productos,
+                        proveedores, clientes y usuarios.
+                    </p>
 
                 </div>
 
@@ -221,27 +309,24 @@
      SERVICIOS
 ========================================================== -->
 
-<section id="servicios" class="py-5">
+<section id="servicios" class="section section-gray">
 
     <div class="container">
 
-        <div class="text-center mb-5">
+        <div class="section-heading">
 
-            <h2 class="fw-bold text-primary">
-                Nuestros Servicios
-            </h2>
+            <span>NUESTROS SERVICIOS</span>
 
-            <p class="lead">
-                Conoce las soluciones que ofrecemos.
+            <h2>Soluciones para diferentes necesidades</h2>
+
+            <p>
+                Conoce algunos de los servicios que ofrecemos.
             </p>
 
         </div>
 
-        <div
-            id="contenedorServicios"
-            class="row g-4"
-        >
-        </div>
+
+        <div id="contenedorServicios" class="row g-4 mt-3"></div>
 
     </div>
 
@@ -252,151 +337,148 @@
      PRODUCTOS
 ========================================================== -->
 
-<section id="productos" class="py-5 bg-light">
+<section id="productos" class="section">
 
     <div class="container">
 
-        <div class="text-center mb-5">
+        <div class="section-heading">
 
-            <h2 class="fw-bold text-primary">
-                Gestión de Productos
-            </h2>
+            <span>PRODUCTOS</span>
 
-            <p class="lead">
-                Administra los productos disponibles.
+            <h2>Administración de productos</h2>
+
+            <p>
+                Registra y administra los productos disponibles.
             </p>
 
         </div>
 
 
-        <div class="row">
+        <div class="row g-4 mt-3">
 
             <!-- FORMULARIO -->
 
-            <div class="col-lg-4 mb-4">
+            <div class="col-lg-4">
 
-                <div class="card shadow-sm border-0">
+                <div class="management-box">
 
-                    <div class="card-body">
+                    <h3>
+                        <i class="bi bi-plus-circle me-2"></i>
+                        <span id="tituloFormularioProducto">
+                            Nuevo producto
+                        </span>
+                    </h3>
 
-                        <h4
-                            id="tituloFormularioProducto"
-                            class="text-primary mb-4"
-                        >
-                            Registrar Producto
-                        </h4>
+                    <form id="formProducto">
 
-                        <form id="formProducto">
+                        <input type="hidden" id="idProducto">
+
+                        <div class="form-group">
+
+                            <label for="nombreProducto">
+                                Nombre
+                            </label>
 
                             <input
-                                type="hidden"
-                                id="idProducto"
+                                type="text"
+                                id="nombreProducto"
+                                class="form-control"
+                                placeholder="Nombre del producto"
+                                required
                             >
 
-                            <div class="mb-3">
-
-                                <label
-                                    for="nombreProducto"
-                                    class="form-label"
-                                >
-                                    Nombre
-                                </label>
-
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="nombreProducto"
-                                    required
-                                >
-
-                            </div>
+                        </div>
 
 
-                            <div class="mb-3">
+                        <div class="form-group">
 
-                                <label
-                                    for="categoriaProducto"
-                                    class="form-label"
-                                >
-                                    Categoría
-                                </label>
+                            <label for="categoriaProducto">
+                                Categoría
+                            </label>
 
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="categoriaProducto"
-                                    required
-                                >
-
-                            </div>
-
-
-                            <div class="mb-3">
-
-                                <label
-                                    for="precioProducto"
-                                    class="form-label"
-                                >
-                                    Precio
-                                </label>
-
-                                <input
-                                    type="number"
-                                    class="form-control"
-                                    id="precioProducto"
-                                    min="0"
-                                    step="0.01"
-                                    required
-                                >
-
-                            </div>
-
-
-                            <div class="mb-3">
-
-                                <label
-                                    for="stockProducto"
-                                    class="form-label"
-                                >
-                                    Stock
-                                </label>
-
-                                <input
-                                    type="number"
-                                    class="form-control"
-                                    id="stockProducto"
-                                    min="0"
-                                    required
-                                >
-
-                            </div>
-
-
-                            <button
-                                type="submit"
-                                id="botonGuardarProducto"
-                                class="btn btn-primary w-100"
+                            <input
+                                type="text"
+                                id="categoriaProducto"
+                                class="form-control"
+                                placeholder="Ej. Herramientas"
+                                required
                             >
-                                Guardar Producto
-                            </button>
+
+                        </div>
 
 
-                            <button
-                                type="button"
-                                id="botonCancelarEdicion"
-                                class="btn btn-secondary w-100 mt-2 d-none"
-                            >
-                                Cancelar
-                            </button>
+                        <div class="row">
 
-                            <div
-                                id="mensajeProducto"
-                                class="mt-3"
-                            ></div>
+                            <div class="col-6">
 
-                        </form>
+                                <div class="form-group">
 
-                    </div>
+                                    <label for="precioProducto">
+                                        Precio
+                                    </label>
+
+                                    <input
+                                        type="number"
+                                        id="precioProducto"
+                                        class="form-control"
+                                        min="0"
+                                        step="0.01"
+                                        required
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-6">
+
+                                <div class="form-group">
+
+                                    <label for="stockProducto">
+                                        Stock
+                                    </label>
+
+                                    <input
+                                        type="number"
+                                        id="stockProducto"
+                                        class="form-control"
+                                        min="0"
+                                        required
+                                    >
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            id="botonGuardarProducto"
+                            class="btn btn-primary w-100"
+                        >
+                            <i class="bi bi-save me-2"></i>
+                            Guardar producto
+                        </button>
+
+
+                        <button
+                            type="button"
+                            id="botonCancelarEdicion"
+                            class="btn btn-light w-100 mt-2 d-none"
+                        >
+                            Cancelar edición
+                        </button>
+
+
+                        <div
+                            id="mensajeProducto"
+                            class="mensaje mt-3"
+                        ></div>
+
+                    </form>
 
                 </div>
 
@@ -407,61 +489,64 @@
 
             <div class="col-lg-8">
 
-                <div class="card shadow-sm border-0">
+                <div class="table-box">
 
-                    <div class="card-body">
+                    <div class="table-header">
 
-                        <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h3>Productos registrados</h3>
 
-                            <h4 class="text-primary mb-0">
-                                Productos registrados
-                            </h4>
+                            <small>
+                                Total:
+                                <strong id="contadorProductosTabla">0</strong>
+                            </small>
+                        </div>
 
-                            <span
-                                id="contadorProductos"
-                                class="badge bg-primary"
+                        <div class="search-box">
+
+                            <i class="bi bi-search"></i>
+
+                            <input
+                                type="text"
+                                id="busquedaProductos"
+                                placeholder="Buscar producto..."
                             >
-                                0 productos
-                            </span>
 
                         </div>
 
-
-                        <div class="table-responsive">
-
-                            <table class="table table-hover align-middle">
-
-                                <thead class="table-primary">
-
-                                    <tr>
-
-                                        <th>ID</th>
-                                        <th>Producto</th>
-                                        <th>Categoría</th>
-                                        <th>Precio</th>
-                                        <th>Stock</th>
-                                        <th>Estado</th>
-                                        <th>Acciones</th>
-
-                                    </tr>
-
-                                </thead>
-
-                                <tbody id="tablaProductos">
-                                </tbody>
-
-                            </table>
-
-                        </div>
+                    </div>
 
 
-                        <div
-                            id="sinProductos"
-                            class="text-center text-muted py-4 d-none"
-                        >
-                            No existen productos registrados.
-                        </div>
+                    <div class="table-responsive">
 
+                        <table class="table align-middle">
+
+                            <thead>
+
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Categoría</th>
+                                    <th>Precio</th>
+                                    <th>Stock</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody id="tablaProductos"></tbody>
+
+                        </table>
+
+                    </div>
+
+
+                    <div
+                        id="sinProductos"
+                        class="empty-state d-none"
+                    >
+                        <i class="bi bi-box"></i>
+                        <p>No existen productos registrados.</p>
                     </div>
 
                 </div>
@@ -476,109 +561,440 @@
 
 
 <!-- ==========================================================
-     AUTENTICACIÓN
+     INFORMACIÓN
 ========================================================== -->
 
-<section id="autenticacion" class="py-5">
+<section id="informacion" class="section section-gray">
 
     <div class="container">
 
-        <div class="text-center mb-5">
+        <div class="section-heading">
 
-            <h2 class="fw-bold text-primary">
-                Acceso de Usuarios
-            </h2>
+            <span>INFORMACIÓN</span>
 
-            <p class="lead">
-                Registra una cuenta o inicia sesión.
+            <h2>Proveedores y clientes</h2>
+
+            <p>
+                Administra la información relacionada con la empresa.
             </p>
 
         </div>
 
 
-        <!-- USUARIO CONECTADO -->
+        <!-- PROVEEDORES -->
 
-        <div
-            id="panelAutenticacion"
-            class="alert alert-success d-none text-center"
-        >
+        <div class="management-section mt-5">
 
-            <h5>
-                Sesión iniciada
-            </h5>
+            <div class="management-title">
 
-            <p class="mb-2">
-                Bienvenido/a,
-                <strong id="nombreUsuarioActual"></strong>
-            </p>
+                <div>
 
-            <button
-                type="button"
-                id="usuarioConectado"
-                class="btn btn-danger"
-            >
-                Cerrar sesión
-            </button>
+                    <span class="small-label">
+                        PROVEEDORES
+                    </span>
 
-        </div>
+                    <h3>
+                        <i class="bi bi-building me-2"></i>
+                        Proveedores registrados
+                    </h3>
+
+                </div>
+
+            </div>
 
 
-        <div
-            id="contenidoAutenticacion"
-            class="row justify-content-center"
-        >
+            <div class="row g-4">
 
-            <!-- REGISTRO -->
+                <div class="col-lg-4">
 
-            <div class="col-md-5 mb-4">
+                    <div class="form-card">
 
-                <div class="card shadow-sm border-0 h-100">
+                        <h4>Agregar proveedor</h4>
 
-                    <div class="card-body">
+                        <form id="formProveedor">
 
-                        <h4 class="text-primary mb-4">
-                            Crear cuenta
-                        </h4>
+                            <input type="hidden" id="idProveedor">
 
-                        <form id="formRegistro">
+                            <input
+                                type="text"
+                                id="nombreProveedor"
+                                class="form-control"
+                                placeholder="Nombre"
+                                required
+                            >
 
-                            <div class="mb-3">
+                            <input
+                                type="text"
+                                id="telefonoProveedor"
+                                class="form-control"
+                                placeholder="Teléfono"
+                            >
 
-                                <label
-                                    for="usuarioRegistro"
-                                    class="form-label"
-                                >
-                                    Usuario
-                                </label>
+                            <input
+                                type="email"
+                                id="correoProveedor"
+                                class="form-control"
+                                placeholder="Correo electrónico"
+                            >
+
+                            <button
+                                type="submit"
+                                id="botonGuardarProveedor"
+                                class="btn btn-primary w-100"
+                            >
+                                <i class="bi bi-save me-2"></i>
+                                Guardar proveedor
+                            </button>
+
+                            <button
+                                type="button"
+                                id="botonCancelarProveedor"
+                                class="btn btn-light w-100 d-none"
+                            >
+                                Cancelar
+                            </button>
+
+                            <div
+                                id="mensajeProveedor"
+                                class="mensaje"
+                            ></div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-8">
+
+                    <div class="table-box">
+
+                        <div class="table-header">
+
+                            <h4>Listado</h4>
+
+                            <div class="search-box">
+
+                                <i class="bi bi-search"></i>
 
                                 <input
                                     type="text"
-                                    class="form-control"
-                                    id="usuarioRegistro"
-                                    required
+                                    id="busquedaProveedores"
+                                    placeholder="Buscar proveedor..."
                                 >
 
                             </div>
 
+                        </div>
 
-                            <div class="mb-3">
 
-                                <label
-                                    for="passwordRegistro"
-                                    class="form-label"
-                                >
-                                    Contraseña
-                                </label>
+                        <div class="table-responsive">
+
+                            <table class="table align-middle">
+
+                                <thead>
+
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Teléfono</th>
+                                        <th>Correo</th>
+                                        <th>Acciones</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="tablaProveedores"></tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CLIENTES -->
+
+        <div class="management-section mt-5">
+
+            <div class="management-title">
+
+                <div>
+
+                    <span class="small-label">
+                        CLIENTES
+                    </span>
+
+                    <h3>
+                        <i class="bi bi-people me-2"></i>
+                        Clientes registrados
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <div class="row g-4">
+
+                <div class="col-lg-4">
+
+                    <div class="form-card">
+
+                        <h4>Agregar cliente</h4>
+
+                        <form id="formCliente">
+
+                            <input type="hidden" id="idCliente">
+
+                            <input
+                                type="text"
+                                id="nombreCliente"
+                                class="form-control"
+                                placeholder="Nombre"
+                                required
+                            >
+
+                            <input
+                                type="email"
+                                id="correoCliente"
+                                class="form-control"
+                                placeholder="Correo electrónico"
+                            >
+
+                            <input
+                                type="text"
+                                id="telefonoCliente"
+                                class="form-control"
+                                placeholder="Teléfono"
+                            >
+
+                            <button
+                                type="submit"
+                                id="botonGuardarCliente"
+                                class="btn btn-primary w-100"
+                            >
+                                <i class="bi bi-save me-2"></i>
+                                Guardar cliente
+                            </button>
+
+                            <button
+                                type="button"
+                                id="botonCancelarCliente"
+                                class="btn btn-light w-100 d-none"
+                            >
+                                Cancelar
+                            </button>
+
+                            <div
+                                id="mensajeCliente"
+                                class="mensaje"
+                            ></div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-8">
+
+                    <div class="table-box">
+
+                        <div class="table-header">
+
+                            <h4>Listado</h4>
+
+                            <div class="search-box">
+
+                                <i class="bi bi-search"></i>
 
                                 <input
-                                    type="password"
-                                    class="form-control"
-                                    id="passwordRegistro"
-                                    required
+                                    type="text"
+                                    id="busquedaClientes"
+                                    placeholder="Buscar cliente..."
                                 >
 
                             </div>
 
+                        </div>
+
+
+                        <div class="table-responsive">
+
+                            <table class="table align-middle">
+
+                                <thead>
+
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Correo</th>
+                                        <th>Teléfono</th>
+                                        <th>Acciones</th>
+                                    </tr>
+
+                                </thead>
+
+                                <tbody id="tablaClientes"></tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RELACIÓN -->
+
+        <div class="related-box mt-5">
+
+            <div class="related-content">
+
+                <div>
+
+                    <span class="small-label">
+                        INFORMACIÓN RELACIONADA
+                    </span>
+
+                    <h3>
+                        Consulta de información
+                    </h3>
+
+                    <p>
+                        Visualiza productos junto con la información
+                        relacionada de proveedores y clientes.
+                    </p>
+
+                </div>
+
+
+                <button
+                    id="botonConsultaRelacionada"
+                    class="btn btn-primary"
+                >
+                    <i class="bi bi-diagram-3 me-2"></i>
+                    Consultar información
+                </button>
+
+            </div>
+
+
+            <div class="table-responsive mt-4">
+
+                <table class="table align-middle">
+
+                    <thead>
+
+                        <tr>
+                            <th>Producto</th>
+                            <th>Proveedor</th>
+                            <th>Cliente</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tablaRelaciones"></tbody>
+
+                </table>
+
+            </div>
+
+
+            <div class="related-count">
+                Registros relacionados:
+                <strong id="contadorRelaciones">0</strong>
+            </div>
+
+            <div
+                id="sinRelaciones"
+                class="empty-state d-none"
+            >
+                <i class="bi bi-diagram-2"></i>
+                <p>No existen datos relacionados.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================================
+     USUARIOS
+========================================================== -->
+
+<section id="usuarios" class="section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <span>USUARIOS</span>
+
+            <h2>Acceso al sistema</h2>
+
+            <p>
+                Registra una cuenta o inicia sesión para acceder.
+            </p>
+
+        </div>
+
+
+        <!-- AUTENTICACIÓN -->
+
+        <div id="panelAutenticacion" class="auth-container mt-4">
+
+            <div class="row g-0">
+
+                <!-- REGISTRO -->
+
+                <div class="col-lg-6">
+
+                    <div class="auth-card">
+
+                        <div class="auth-icon">
+                            <i class="bi bi-person-plus"></i>
+                        </div>
+
+                        <h3>Crear cuenta</h3>
+
+                        <p>
+                            Registra un nuevo usuario.
+                        </p>
+
+                        <form id="formRegistro">
+
+                            <input
+                                type="text"
+                                id="usuarioRegistro"
+                                class="form-control"
+                                placeholder="Usuario"
+                                required
+                            >
+
+                            <input
+                                type="password"
+                                id="passwordRegistro"
+                                class="form-control"
+                                placeholder="Contraseña"
+                                required
+                            >
 
                             <button
                                 type="submit"
@@ -589,7 +1005,7 @@
 
                             <div
                                 id="mensajeRegistro"
-                                class="mt-3"
+                                class="mensaje"
                             ></div>
 
                         </form>
@@ -598,71 +1014,51 @@
 
                 </div>
 
-            </div>
 
+                <!-- LOGIN -->
 
-            <!-- LOGIN -->
+                <div class="col-lg-6">
 
-            <div class="col-md-5 mb-4">
+                    <div class="auth-card auth-login">
 
-                <div class="card shadow-sm border-0 h-100">
+                        <div class="auth-icon">
+                            <i class="bi bi-box-arrow-in-right"></i>
+                        </div>
 
-                    <div class="card-body">
+                        <h3>Iniciar sesión</h3>
 
-                        <h4 class="text-primary mb-4">
-                            Iniciar sesión
-                        </h4>
+                        <p>
+                            Accede con tu cuenta.
+                        </p>
 
                         <form id="formLogin">
 
-                            <div class="mb-3">
+                            <input
+                                type="text"
+                                id="usuarioLogin"
+                                class="form-control"
+                                placeholder="Usuario"
+                                required
+                            >
 
-                                <label
-                                    for="usuarioLogin"
-                                    class="form-label"
-                                >
-                                    Usuario
-                                </label>
-
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="usuarioLogin"
-                                    required
-                                >
-
-                            </div>
-
-
-                            <div class="mb-3">
-
-                                <label
-                                    for="passwordLogin"
-                                    class="form-label"
-                                >
-                                    Contraseña
-                                </label>
-
-                                <input
-                                    type="password"
-                                    class="form-control"
-                                    id="passwordLogin"
-                                    required
-                                >
-
-                            </div>
-
+                            <input
+                                type="password"
+                                id="passwordLogin"
+                                class="form-control"
+                                placeholder="Contraseña"
+                                required
+                            >
 
                             <button
                                 type="submit"
-                                class="btn btn-success w-100"
+                                class="btn btn-primary w-100"
                             >
                                 Iniciar sesión
                             </button>
 
                             <div
                                 id="mensajeLogin"
-                                class="mt-3"
+                                class="mensaje"
                             ></div>
 
                         </form>
@@ -676,14 +1072,35 @@
         </div>
 
 
-        <div class="alert alert-info mt-3">
+        <!-- USUARIO CONECTADO -->
 
-            <strong>Información:</strong>
+        <div
+            id="contenidoAutenticacion"
+            class="usuario-conectado d-none"
+        >
 
-            Esta página utiliza almacenamiento local del navegador
-            para demostrar el funcionamiento de usuarios y productos.
-            La versión con autenticación real, Flask-Login y MySQL
-            corresponde al proyecto desarrollado con Flask.
+            <div class="usuario-icon">
+                <i class="bi bi-person-check"></i>
+            </div>
+
+            <div>
+
+                <span>Sesión iniciada</span>
+
+                <h3>
+                    Bienvenido,
+                    <strong id="nombreUsuarioActual"></strong>
+                </h3>
+
+            </div>
+
+            <button
+                id="botonCerrarSesion"
+                class="btn btn-outline-danger ms-auto"
+            >
+                <i class="bi bi-box-arrow-right me-2"></i>
+                Cerrar sesión
+            </button>
 
         </div>
 
@@ -696,146 +1113,139 @@
      CONTACTO
 ========================================================== -->
 
-<section id="contacto" class="py-5 bg-light">
+<section id="contacto" class="section section-dark">
 
     <div class="container">
 
-        <div class="text-center mb-5">
+        <div class="row align-items-center g-5">
 
-            <h2 class="fw-bold text-primary">
-                Contáctanos
-            </h2>
+            <div class="col-lg-5">
 
-            <p class="lead">
-                Solicita información sobre nuestros servicios.
-            </p>
+                <span class="dark-label">
+                    CONTACTO
+                </span>
 
-        </div>
+                <h2>
+                    ¿Necesitas una solución tecnológica?
+                </h2>
+
+                <p>
+                    Envíanos tu solicitud y nos pondremos en contacto
+                    contigo.
+                </p>
+
+                <div class="contact-info">
+
+                    <div>
+                        <i class="bi bi-envelope"></i>
+                        <span>contacto@tecnosoluciones.com</span>
+                    </div>
+
+                    <div>
+                        <i class="bi bi-headset"></i>
+                        <span>Soporte tecnológico</span>
+                    </div>
+
+                    <div>
+                        <i class="bi bi-clock"></i>
+                        <span>Atención personalizada</span>
+                    </div>
+
+                </div>
+
+            </div>
 
 
-        <div class="row justify-content-center">
+            <div class="col-lg-7">
 
-            <div class="col-md-8">
+                <div class="contact-form">
 
-                <div class="card shadow-sm border-0">
+                    <h3>Envíanos un mensaje</h3>
 
-                    <div class="card-body p-4">
+                    <form id="formServicio">
 
-                        <form id="formServicio">
+                        <div class="row">
 
-                            <div class="mb-3">
-
-                                <label
-                                    for="nombre"
-                                    class="form-label"
-                                >
-                                    Nombre
-                                </label>
+                            <div class="col-md-6">
 
                                 <input
                                     type="text"
-                                    class="form-control"
                                     id="nombre"
+                                    class="form-control"
+                                    placeholder="Nombre"
                                     required
                                 >
 
                             </div>
 
-
-                            <div class="mb-3">
-
-                                <label
-                                    for="correo"
-                                    class="form-label"
-                                >
-                                    Correo electrónico
-                                </label>
+                            <div class="col-md-6">
 
                                 <input
                                     type="email"
-                                    class="form-control"
                                     id="correo"
-                                    required
-                                >
-
-                            </div>
-
-
-                            <div class="mb-3">
-
-                                <label
-                                    for="servicio"
-                                    class="form-label"
-                                >
-                                    Servicio
-                                </label>
-
-                                <select
-                                    class="form-select"
-                                    id="servicio"
-                                    required
-                                >
-
-                                    <option value="">
-                                        Seleccione un servicio
-                                    </option>
-
-                                    <option value="Desarrollo Web">
-                                        Desarrollo Web
-                                    </option>
-
-                                    <option value="Soporte Técnico">
-                                        Soporte Técnico
-                                    </option>
-
-                                    <option value="Capacitación">
-                                        Capacitación
-                                    </option>
-
-                                    <option value="Consultoría">
-                                        Consultoría Tecnológica
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-
-                            <div class="mb-3">
-
-                                <label
-                                    for="detalleSolicitud"
-                                    class="form-label"
-                                >
-                                    Detalle de la solicitud
-                                </label>
-
-                                <textarea
                                     class="form-control"
-                                    id="detalleSolicitud"
-                                    rows="5"
+                                    placeholder="Correo electrónico"
                                     required
-                                ></textarea>
+                                >
 
                             </div>
 
-
-                            <button
-                                type="submit"
-                                class="btn btn-primary w-100"
-                            >
-                                Enviar solicitud
-                            </button>
+                        </div>
 
 
-                            <div
-                                id="mensajeContacto"
-                                class="mt-3"
-                            ></div>
+                        <select
+                            id="servicio"
+                            class="form-select"
+                            required
+                        >
 
-                        </form>
+                            <option value="">
+                                Selecciona un servicio
+                            </option>
 
-                    </div>
+                            <option value="Desarrollo Web">
+                                Desarrollo Web
+                            </option>
+
+                            <option value="Soporte Técnico">
+                                Soporte Técnico
+                            </option>
+
+                            <option value="Capacitación">
+                                Capacitación
+                            </option>
+
+                            <option value="Consultoría">
+                                Consultoría
+                            </option>
+
+                        </select>
+
+
+                        <textarea
+                            id="detalleSolicitud"
+                            class="form-control"
+                            rows="5"
+                            placeholder="Cuéntanos qué necesitas..."
+                            required
+                        ></textarea>
+
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                        >
+                            <i class="bi bi-send me-2"></i>
+                            Enviar solicitud
+                        </button>
+
+
+                        <div
+                            id="mensajeContacto"
+                            class="mensaje"
+                        ></div>
+
+                    </form>
 
                 </div>
 
@@ -852,42 +1262,60 @@
      FOOTER
 ========================================================== -->
 
-<footer class="bg-dark text-white text-center py-4">
+<footer>
 
     <div class="container">
 
-        <p class="mb-1">
-            <strong>TecnoSoluciones</strong>
-        </p>
+        <div class="footer-main">
 
-        <p class="mb-1">
-            Servicios de desarrollo web, soporte técnico,
-            capacitación y consultoría tecnológica.
-        </p>
+            <div>
 
-        <p class="mb-0">
-            © 2026 TecnoSoluciones. Todos los derechos reservados.
-        </p>
+                <a href="#inicio" class="footer-brand">
+                    <i class="bi bi-cpu-fill me-2"></i>
+                    TecnoSoluciones
+                </a>
+
+                <p>
+                    Soluciones tecnológicas para mejorar la gestión
+                    de tu negocio.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="#inicio">Inicio</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#productos">Productos</a>
+                <a href="#contacto">Contacto</a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <span>
+                Proyecto Integrador - Desarrollo de Aplicaciones Web
+            </span>
+
+            <span>
+                © 2026 TecnoSoluciones
+            </span>
+
+        </div>
 
     </div>
 
 </footer>
 
 
-<!-- ==========================================================
-     BOOTSTRAP
-========================================================== -->
-
-<script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-></script>
-
-
-<!-- ==========================================================
-     JAVASCRIPT DEL PROYECTO
-========================================================== -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script src="static/js/script.js"></script>
 
 </body>
 </html>
+```

@@ -1,8 +1,54 @@
+```javascript
 // ==========================================================
 // TECNOSOLUCIONES
-// SEMANAS 13 Y 14
-// CRUD DE PRODUCTOS Y AUTENTICACIÓN
+// SEMANA 15 - CRUD
+// GitHub Pages - Persistencia con localStorage
 // ==========================================================
+
+
+// ==========================================================
+// FUNCIONES GENERALES
+// ==========================================================
+
+function obtenerDatos(clave) {
+    try {
+        return JSON.parse(localStorage.getItem(clave)) || [];
+    } catch (error) {
+        console.error("Error al obtener datos:", error);
+        return [];
+    }
+}
+
+function guardarDatos(clave, datos) {
+    localStorage.setItem(clave, JSON.stringify(datos));
+}
+
+function escaparHTML(texto) {
+    if (texto === null || texto === undefined) {
+        return "";
+    }
+
+    return String(texto)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+function mostrarMensaje(elemento, mensaje, tipo = "success") {
+    if (!elemento) return;
+
+    elemento.innerHTML = `
+        <div class="alert alert-${tipo} mt-3">
+            ${escaparHTML(mensaje)}
+        </div>
+    `;
+
+    setTimeout(() => {
+        elemento.innerHTML = "";
+    }, 3000);
+}
 
 
 // ==========================================================
@@ -14,70 +60,49 @@ const servicios = [
         nombre: "Desarrollo Web",
         descripcion:
             "Diseñamos sitios web modernos, funcionales y adaptables a diferentes dispositivos.",
-        color: "primary"
+        icono: "bi-code-slash"
     },
     {
         nombre: "Soporte Técnico",
         descripcion:
-            "Ofrecemos mantenimiento preventivo y correctivo para equipos informáticos.",
-        color: "success"
+            "Brindamos asistencia para resolver problemas de hardware, software y sistemas.",
+        icono: "bi-tools"
     },
     {
         nombre: "Capacitación",
         descripcion:
-            "Realizamos cursos y asesorías sobre herramientas digitales y tecnología.",
-        color: "warning"
+            "Ofrecemos capacitación en herramientas tecnológicas y desarrollo de aplicaciones.",
+        icono: "bi-mortarboard"
     },
     {
-        nombre: "Consultoría",
+        nombre: "Consultoría Tecnológica",
         descripcion:
-            "Brindamos asesoramiento tecnológico para empresas y emprendedores.",
-        color: "info"
+            "Asesoramos en la implementación y mejora de soluciones tecnológicas.",
+        icono: "bi-lightbulb"
     }
 ];
 
-
-// ==========================================================
-// MOSTRAR SERVICIOS
-// ==========================================================
-
 function mostrarServicios() {
+    const contenedor = document.getElementById("contenedorServicios");
 
-    const contenedorServicios =
-        document.getElementById("contenedorServicios");
+    if (!contenedor) return;
 
-    if (!contenedorServicios) {
-        return;
-    }
+    contenedor.innerHTML = "";
 
-    contenedorServicios.innerHTML = "";
-
-    servicios.forEach(function (servicio) {
-
-        contenedorServicios.innerHTML += `
-            <div class="col-md-6 col-lg-3">
+    servicios.forEach((servicio) => {
+        contenedor.innerHTML += `
+            <div class="col-md-6 col-lg-3 mb-4">
                 <div class="card h-100 shadow-sm border-0">
                     <div class="card-body text-center">
-                        <div class="mb-3">
-                            <span class="badge bg-${servicio.color}">
-                                Servicio
-                            </span>
-                        </div>
+                        <i class="bi ${servicio.icono} fs-1 text-primary"></i>
 
-                        <h5 class="card-title">
-                            ${servicio.nombre}
+                        <h5 class="card-title mt-3">
+                            ${escaparHTML(servicio.nombre)}
                         </h5>
 
                         <p class="card-text">
-                            ${servicio.descripcion}
+                            ${escaparHTML(servicio.descripcion)}
                         </p>
-
-                        <button
-                            type="button"
-                            class="btn btn-outline-${servicio.color}"
-                            onclick="mostrarDetalle('${servicio.nombre}', '${servicio.descripcion}')">
-                            Ver detalles
-                        </button>
                     </div>
                 </div>
             </div>
@@ -87,98 +112,45 @@ function mostrarServicios() {
 
 
 // ==========================================================
-// DETALLE DEL SERVICIO
+// PRODUCTOS
 // ==========================================================
 
-function mostrarDetalle(nombre, descripcion) {
-
-    alert(
-        nombre +
-        "\n\n" +
-        descripcion
-    );
+function obtenerProductos() {
+    return obtenerDatos("tecnoSolucionesProductos");
 }
 
-
-// ==========================================================
-// SEMANA 13
-// CRUD DE PRODUCTOS
-// ==========================================================
-
-let productos = JSON.parse(
-    localStorage.getItem("tecnoSolucionesProductos")
-) || [];
-
-
-// Producto inicial de ejemplo
-
-if (productos.length === 0) {
-
-    productos.push({
-        id: 1,
-        nombre: "Taladro Eléctrico",
-        categoria: "Herramientas",
-        precio: 85.50,
-        stock: 15
-    });
-
-    localStorage.setItem(
-        "tecnoSolucionesProductos",
-        JSON.stringify(productos)
-    );
+function guardarProductos(productos) {
+    guardarDatos("tecnoSolucionesProductos", productos);
 }
-
-
-// ==========================================================
-// ELEMENTOS DEL HTML
-// ==========================================================
-
-const formularioProducto =
-    document.getElementById("formProducto");
-
-const tablaProductos =
-    document.getElementById("tablaProductos");
-
-const contadorProductos =
-    document.getElementById("contadorProductos");
-
-const mensajeProducto =
-    document.getElementById("mensajeProducto");
-
-const sinProductos =
-    document.getElementById("sinProductos");
-
-const idProducto =
-    document.getElementById("idProducto");
-
-const tituloFormularioProducto =
-    document.getElementById("tituloFormularioProducto");
-
-const botonGuardarProducto =
-    document.getElementById("botonGuardarProducto");
-
-const botonCancelarEdicion =
-    document.getElementById("botonCancelarEdicion");
-
-
-// ==========================================================
-// MOSTRAR PRODUCTOS
-// ==========================================================
 
 function mostrarProductos() {
+    const tabla = document.getElementById("tablaProductos");
+    const sinProductos = document.getElementById("sinProductos");
+    const contador = document.getElementById("contadorProductosTabla");
+    const busqueda = document.getElementById("busquedaProductos");
 
-    if (!tablaProductos) {
-        return;
+    if (!tabla) return;
+
+    const productos = obtenerProductos();
+
+    const textoBusqueda = busqueda
+        ? busqueda.value.toLowerCase().trim()
+        : "";
+
+    const productosFiltrados = productos.filter((producto) => {
+        return (
+            String(producto.nombre || "").toLowerCase().includes(textoBusqueda) ||
+            String(producto.categoria || "").toLowerCase().includes(textoBusqueda)
+        );
+    });
+
+    tabla.innerHTML = "";
+
+    if (contador) {
+        contador.textContent = productosFiltrados.length;
     }
 
-    tablaProductos.innerHTML = "";
-
-    if (contadorProductos) {
-        contadorProductos.textContent = productos.length;
-    }
-
-    if (productos.length === 0) {
-
+    if (productosFiltrados.length === 0) {
         if (sinProductos) {
             sinProductos.style.display = "block";
         }
@@ -190,37 +162,49 @@ function mostrarProductos() {
         sinProductos.style.display = "none";
     }
 
-    productos.forEach(function (producto) {
+    productosFiltrados.forEach((producto) => {
+        const disponible = Number(producto.stock) > 0;
 
-        const estado =
-            Number(producto.stock) > 0
-                ? "Disponible"
-                : "Agotado";
-
-        const claseEstado =
-            Number(producto.stock) > 0
-                ? "success"
-                : "danger";
-
-        tablaProductos.innerHTML += `
+        tabla.innerHTML += `
             <tr>
                 <td>${producto.id}</td>
-                <td>${producto.nombre}</td>
-                <td>${producto.categoria}</td>
-                <td>$${Number(producto.precio).toFixed(2)}</td>
-                <td>${producto.stock}</td>
 
                 <td>
-                    <span class="badge bg-${claseEstado}">
-                        ${estado}
+                    ${escaparHTML(producto.nombre)}
+                </td>
+
+                <td>
+                    ${escaparHTML(producto.categoria)}
+                </td>
+
+                <td>
+                    $${Number(producto.precio).toFixed(2)}
+                </td>
+
+                <td>
+                    ${producto.stock}
+                </td>
+
+                <td>
+                    <span class="badge ${
+                        disponible
+                            ? "bg-success"
+                            : "bg-danger"
+                    }">
+                        ${
+                            disponible
+                                ? "Disponible"
+                                : "Agotado"
+                        }
                     </span>
                 </td>
 
                 <td>
                     <button
                         type="button"
-                        class="btn btn-warning btn-sm"
+                        class="btn btn-warning btn-sm me-1"
                         onclick="editarProducto(${producto.id})">
+                        <i class="bi bi-pencil"></i>
                         Editar
                     </button>
 
@@ -228,6 +212,7 @@ function mostrarProductos() {
                         type="button"
                         class="btn btn-danger btn-sm"
                         onclick="eliminarProducto(${producto.id})">
+                        <i class="bi bi-trash"></i>
                         Eliminar
                     </button>
                 </td>
@@ -236,787 +221,1106 @@ function mostrarProductos() {
     });
 }
 
-
-// ==========================================================
-// GUARDAR PRODUCTOS
-// ==========================================================
-
-function guardarProductos() {
-
-    localStorage.setItem(
-        "tecnoSolucionesProductos",
-        JSON.stringify(productos)
-    );
-}
-
-
-// ==========================================================
-// REGISTRAR / ACTUALIZAR PRODUCTO
-// ==========================================================
-
-if (formularioProducto) {
-
-    formularioProducto.addEventListener(
-        "submit",
-        function (evento) {
-
-            evento.preventDefault();
-
-            const nombre =
-                document
-                    .getElementById("nombreProducto")
-                    .value
-                    .trim();
-
-            const categoria =
-                document
-                    .getElementById("categoriaProducto")
-                    .value
-                    .trim();
-
-            const precio =
-                parseFloat(
-                    document
-                        .getElementById("precioProducto")
-                        .value
-                );
-
-            const stock =
-                parseInt(
-                    document
-                        .getElementById("stockProducto")
-                        .value
-                );
-
-
-            if (
-                nombre === "" ||
-                categoria === "" ||
-                isNaN(precio) ||
-                isNaN(stock)
-            ) {
-
-                mostrarMensajeProducto(
-                    "Complete todos los campos.",
-                    "danger"
-                );
-
-                return;
-            }
-
-
-            if (precio < 0) {
-
-                mostrarMensajeProducto(
-                    "El precio no puede ser negativo.",
-                    "danger"
-                );
-
-                return;
-            }
-
-
-            if (stock < 0) {
-
-                mostrarMensajeProducto(
-                    "El stock no puede ser negativo.",
-                    "danger"
-                );
-
-                return;
-            }
-
-
-            // ==================================================
-            // EDITAR PRODUCTO
-            // ==================================================
-
-            if (
-                idProducto &&
-                idProducto.value !== ""
-            ) {
-
-                const id =
-                    Number(idProducto.value);
-
-                const indice =
-                    productos.findIndex(
-                        function (producto) {
-                            return producto.id === id;
-                        }
-                    );
-
-
-                if (indice !== -1) {
-
-                    productos[indice] = {
-
-                        id: id,
-                        nombre: nombre,
-                        categoria: categoria,
-                        precio: precio,
-                        stock: stock
-
-                    };
-
-                    guardarProductos();
-
-                    mostrarProductos();
-
-                    cancelarEdicion();
-
-                    mostrarMensajeProducto(
-                        "Producto actualizado correctamente.",
-                        "success"
-                    );
-                }
-
-                return;
-            }
-
-
-            // ==================================================
-            // NUEVO PRODUCTO
-            // ==================================================
-
-            let nuevoId = 1;
-
-            if (productos.length > 0) {
-
-                nuevoId =
-                    Math.max(
-                        ...productos.map(
-                            function (producto) {
-                                return Number(producto.id);
-                            }
-                        )
-                    ) + 1;
-            }
-
-
-            const nuevoProducto = {
-
-                id: nuevoId,
-                nombre: nombre,
-                categoria: categoria,
-                precio: precio,
-                stock: stock
-
-            };
-
-
-            productos.push(nuevoProducto);
-
-            guardarProductos();
-
-            mostrarProductos();
-
-            formularioProducto.reset();
-
-            mostrarMensajeProducto(
-                "Producto registrado correctamente.",
-                "success"
-            );
-        }
-    );
-}
-
-
-// ==========================================================
-// EDITAR PRODUCTO
-// ==========================================================
-
 function editarProducto(id) {
+    const productos = obtenerProductos();
 
-    const producto =
-        productos.find(
-            function (item) {
-                return item.id === id;
-            }
-        );
+    const producto = productos.find(
+        (item) => Number(item.id) === Number(id)
+    );
 
-    if (!producto) {
-        return;
+    if (!producto) return;
+
+    const idProducto = document.getElementById("idProducto");
+    const nombre = document.getElementById("nombreProducto");
+    const categoria = document.getElementById("categoriaProducto");
+    const precio = document.getElementById("precioProducto");
+    const stock = document.getElementById("stockProducto");
+    const titulo = document.getElementById("tituloFormularioProducto");
+    const boton = document.getElementById("botonGuardarProducto");
+    const cancelar = document.getElementById("botonCancelarEdicion");
+
+    if (idProducto) idProducto.value = producto.id;
+    if (nombre) nombre.value = producto.nombre;
+    if (categoria) categoria.value = producto.categoria;
+    if (precio) precio.value = producto.precio;
+    if (stock) stock.value = producto.stock;
+
+    if (titulo) {
+        titulo.textContent = "Editar producto";
     }
 
-
-    document.getElementById(
-        "nombreProducto"
-    ).value = producto.nombre;
-
-
-    document.getElementById(
-        "categoriaProducto"
-    ).value = producto.categoria;
-
-
-    document.getElementById(
-        "precioProducto"
-    ).value = producto.precio;
-
-
-    document.getElementById(
-        "stockProducto"
-    ).value = producto.stock;
-
-
-    if (idProducto) {
-        idProducto.value = producto.id;
+    if (boton) {
+        boton.innerHTML = `
+            <i class="bi bi-check-circle"></i>
+            Actualizar producto
+        `;
     }
 
-
-    if (tituloFormularioProducto) {
-
-        tituloFormularioProducto.textContent =
-            "Editar Producto";
+    if (cancelar) {
+        cancelar.style.display = "inline-block";
     }
 
-
-    if (botonGuardarProducto) {
-
-        botonGuardarProducto.textContent =
-            "Actualizar Producto";
-
-        botonGuardarProducto.classList.remove(
-            "btn-success"
-        );
-
-        botonGuardarProducto.classList.add(
-            "btn-warning"
-        );
-    }
-
-
-    if (botonCancelarEdicion) {
-
-        botonCancelarEdicion.classList.remove(
-            "d-none"
-        );
-    }
+    document
+        .getElementById("formProducto")
+        ?.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
 }
 
+function limpiarFormularioProducto() {
+    const formulario = document.getElementById("formProducto");
 
-// ==========================================================
-// CANCELAR EDICIÓN
-// ==========================================================
-
-function cancelarEdicion() {
-
-    if (!formularioProducto) {
-        return;
+    if (formulario) {
+        formulario.reset();
     }
 
-    formularioProducto.reset();
+    const idProducto = document.getElementById("idProducto");
+    const titulo = document.getElementById("tituloFormularioProducto");
+    const boton = document.getElementById("botonGuardarProducto");
+    const cancelar = document.getElementById("botonCancelarEdicion");
 
+    if (idProducto) idProducto.value = "";
 
-    if (idProducto) {
-        idProducto.value = "";
+    if (titulo) {
+        titulo.textContent = "Agregar producto";
     }
 
-
-    if (tituloFormularioProducto) {
-
-        tituloFormularioProducto.textContent =
-            "Registrar Producto";
+    if (boton) {
+        boton.innerHTML = `
+            <i class="bi bi-save"></i>
+            Guardar producto
+        `;
     }
 
-
-    if (botonGuardarProducto) {
-
-        botonGuardarProducto.textContent =
-            "Guardar Producto";
-
-        botonGuardarProducto.classList.remove(
-            "btn-warning"
-        );
-
-        botonGuardarProducto.classList.add(
-            "btn-success"
-        );
-    }
-
-
-    if (botonCancelarEdicion) {
-
-        botonCancelarEdicion.classList.add(
-            "d-none"
-        );
+    if (cancelar) {
+        cancelar.style.display = "none";
     }
 }
-
-
-// ==========================================================
-// ELIMINAR PRODUCTO
-// ==========================================================
 
 function eliminarProducto(id) {
+    const productos = obtenerProductos();
 
-    const confirmar =
-        confirm(
-            "¿Está seguro de eliminar este producto?"
-        );
+    const producto = productos.find(
+        (item) => Number(item.id) === Number(id)
+    );
 
-    if (!confirmar) {
-        return;
-    }
+    if (!producto) return;
 
+    const confirmar = confirm(
+        `¿Deseas eliminar el producto "${producto.nombre}"?`
+    );
 
-    productos =
-        productos.filter(
-            function (producto) {
-                return producto.id !== id;
-            }
-        );
+    if (!confirmar) return;
 
+    const nuevosProductos = productos.filter(
+        (item) => Number(item.id) !== Number(id)
+    );
 
-    guardarProductos();
+    guardarProductos(nuevosProductos);
 
     mostrarProductos();
-
-    mostrarMensajeProducto(
-        "Producto eliminado correctamente.",
-        "warning"
-    );
+    mostrarConsultaRelacionada();
+    actualizarContadores();
 }
 
 
 // ==========================================================
-// MENSAJES DE PRODUCTOS
+// PROVEEDORES
 // ==========================================================
 
-function mostrarMensajeProducto(
-    texto,
-    tipo
-) {
+function obtenerProveedores() {
+    return obtenerDatos("tecnoSolucionesProveedores");
+}
 
-    if (!mensajeProducto) {
+function guardarProveedores(proveedores) {
+    guardarDatos("tecnoSolucionesProveedores", proveedores);
+}
+
+function mostrarProveedores() {
+    const tabla = document.getElementById("tablaProveedores");
+    const busqueda = document.getElementById("busquedaProveedores");
+
+    if (!tabla) return;
+
+    const proveedores = obtenerProveedores();
+
+    const textoBusqueda = busqueda
+        ? busqueda.value.toLowerCase().trim()
+        : "";
+
+    const filtrados = proveedores.filter((proveedor) => {
+        return (
+            String(proveedor.nombre || "")
+                .toLowerCase()
+                .includes(textoBusqueda) ||
+
+            String(proveedor.telefono || "")
+                .toLowerCase()
+                .includes(textoBusqueda) ||
+
+            String(proveedor.correo || "")
+                .toLowerCase()
+                .includes(textoBusqueda)
+        );
+    });
+
+    tabla.innerHTML = "";
+
+    if (filtrados.length === 0) {
+        tabla.innerHTML = `
+            <tr>
+                <td colspan="5" class="text-center text-muted">
+                    No hay proveedores registrados.
+                </td>
+            </tr>
+        `;
+
         return;
     }
 
+    filtrados.forEach((proveedor) => {
+        tabla.innerHTML += `
+            <tr>
+                <td>${proveedor.id}</td>
 
-    mensajeProducto.innerHTML = `
-        <div class="alert alert-${tipo}">
-            ${texto}
-        </div>
-    `;
+                <td>
+                    ${escaparHTML(proveedor.nombre)}
+                </td>
 
+                <td>
+                    ${escaparHTML(proveedor.telefono)}
+                </td>
 
-    setTimeout(
-        function () {
+                <td>
+                    ${escaparHTML(proveedor.correo)}
+                </td>
 
-            mensajeProducto.innerHTML = "";
+                <td>
+                    <button
+                        type="button"
+                        class="btn btn-warning btn-sm me-1"
+                        onclick="editarProveedor(${proveedor.id})">
+                        <i class="bi bi-pencil"></i>
+                        Editar
+                    </button>
 
-        },
-        3000
+                    <button
+                        type="button"
+                        class="btn btn-danger btn-sm"
+                        onclick="eliminarProveedor(${proveedor.id})">
+                        <i class="bi bi-trash"></i>
+                        Eliminar
+                    </button>
+                </td>
+            </tr>
+        `;
+    });
+}
+
+function editarProveedor(id) {
+    const proveedores = obtenerProveedores();
+
+    const proveedor = proveedores.find(
+        (item) => Number(item.id) === Number(id)
     );
+
+    if (!proveedor) return;
+
+    document.getElementById("idProveedor").value = proveedor.id;
+    document.getElementById("nombreProveedor").value = proveedor.nombre;
+    document.getElementById("telefonoProveedor").value = proveedor.telefono;
+    document.getElementById("correoProveedor").value = proveedor.correo;
+
+    const boton = document.getElementById("botonGuardarProveedor");
+    const cancelar = document.getElementById("botonCancelarProveedor");
+
+    if (boton) {
+        boton.innerHTML = `
+            <i class="bi bi-check-circle"></i>
+            Actualizar proveedor
+        `;
+    }
+
+    if (cancelar) {
+        cancelar.style.display = "inline-block";
+    }
+
+    document
+        .getElementById("formProveedor")
+        ?.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+}
+
+function limpiarFormularioProveedor() {
+    const formulario = document.getElementById("formProveedor");
+
+    if (formulario) {
+        formulario.reset();
+    }
+
+    const idProveedor = document.getElementById("idProveedor");
+    const boton = document.getElementById("botonGuardarProveedor");
+    const cancelar = document.getElementById("botonCancelarProveedor");
+
+    if (idProveedor) idProveedor.value = "";
+
+    if (boton) {
+        boton.innerHTML = `
+            <i class="bi bi-save"></i>
+            Guardar proveedor
+        `;
+    }
+
+    if (cancelar) {
+        cancelar.style.display = "none";
+    }
+}
+
+function eliminarProveedor(id) {
+    const proveedores = obtenerProveedores();
+
+    const proveedor = proveedores.find(
+        (item) => Number(item.id) === Number(id)
+    );
+
+    if (!proveedor) return;
+
+    const confirmar = confirm(
+        `¿Deseas eliminar el proveedor "${proveedor.nombre}"?`
+    );
+
+    if (!confirmar) return;
+
+    const nuevosProveedores = proveedores.filter(
+        (item) => Number(item.id) !== Number(id)
+    );
+
+    guardarProveedores(nuevosProveedores);
+
+    mostrarProveedores();
+    mostrarConsultaRelacionada();
+    actualizarContadores();
 }
 
 
 // ==========================================================
-// SEMANA 14
-// AUTENTICACIÓN DEMOSTRATIVA
+// CLIENTES
 // ==========================================================
 
-let usuarios = JSON.parse(
-    localStorage.getItem("tecnoSolucionesUsuarios")
-) || [];
+function obtenerClientes() {
+    return obtenerDatos("tecnoSolucionesClientes");
+}
 
-let usuarioActual =
-    localStorage.getItem(
-        "tecnoSolucionesUsuarioActual"
-    ) || "";
+function guardarClientes(clientes) {
+    guardarDatos("tecnoSolucionesClientes", clientes);
+}
+
+function mostrarClientes() {
+    const tabla = document.getElementById("tablaClientes");
+    const busqueda = document.getElementById("busquedaClientes");
+
+    if (!tabla) return;
+
+    const clientes = obtenerClientes();
+
+    const textoBusqueda = busqueda
+        ? busqueda.value.toLowerCase().trim()
+        : "";
+
+    const filtrados = clientes.filter((cliente) => {
+        return (
+            String(cliente.nombre || "")
+                .toLowerCase()
+                .includes(textoBusqueda) ||
+
+            String(cliente.correo || "")
+                .toLowerCase()
+                .includes(textoBusqueda) ||
+
+            String(cliente.telefono || "")
+                .toLowerCase()
+                .includes(textoBusqueda)
+        );
+    });
+
+    tabla.innerHTML = "";
+
+    if (filtrados.length === 0) {
+        tabla.innerHTML = `
+            <tr>
+                <td colspan="5" class="text-center text-muted">
+                    No hay clientes registrados.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+    filtrados.forEach((cliente) => {
+        tabla.innerHTML += `
+            <tr>
+                <td>${cliente.id}</td>
+
+                <td>
+                    ${escaparHTML(cliente.nombre)}
+                </td>
+
+                <td>
+                    ${escaparHTML(cliente.correo)}
+                </td>
+
+                <td>
+                    ${escaparHTML(cliente.telefono)}
+                </td>
+
+                <td>
+                    <button
+                        type="button"
+                        class="btn btn-warning btn-sm me-1"
+                        onclick="editarCliente(${cliente.id})">
+                        <i class="bi bi-pencil"></i>
+                        Editar
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn btn-danger btn-sm"
+                        onclick="eliminarCliente(${cliente.id})">
+                        <i class="bi bi-trash"></i>
+                        Eliminar
+                    </button>
+                </td>
+            </tr>
+        `;
+    });
+}
+
+function editarCliente(id) {
+    const clientes = obtenerClientes();
+
+    const cliente = clientes.find(
+        (item) => Number(item.id) === Number(id)
+    );
+
+    if (!cliente) return;
+
+    document.getElementById("idCliente").value = cliente.id;
+    document.getElementById("nombreCliente").value = cliente.nombre;
+    document.getElementById("correoCliente").value = cliente.correo;
+    document.getElementById("telefonoCliente").value = cliente.telefono;
+
+    const boton = document.getElementById("botonGuardarCliente");
+    const cancelar = document.getElementById("botonCancelarCliente");
+
+    if (boton) {
+        boton.innerHTML = `
+            <i class="bi bi-check-circle"></i>
+            Actualizar cliente
+        `;
+    }
+
+    if (cancelar) {
+        cancelar.style.display = "inline-block";
+    }
+
+    document
+        .getElementById("formCliente")
+        ?.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+}
+
+function limpiarFormularioCliente() {
+    const formulario = document.getElementById("formCliente");
+
+    if (formulario) {
+        formulario.reset();
+    }
+
+    const idCliente = document.getElementById("idCliente");
+    const boton = document.getElementById("botonGuardarCliente");
+    const cancelar = document.getElementById("botonCancelarCliente");
+
+    if (idCliente) idCliente.value = "";
+
+    if (boton) {
+        boton.innerHTML = `
+            <i class="bi bi-save"></i>
+            Guardar cliente
+        `;
+    }
+
+    if (cancelar) {
+        cancelar.style.display = "none";
+    }
+}
+
+function eliminarCliente(id) {
+    const clientes = obtenerClientes();
+
+    const cliente = clientes.find(
+        (item) => Number(item.id) === Number(id)
+    );
+
+    if (!cliente) return;
+
+    const confirmar = confirm(
+        `¿Deseas eliminar el cliente "${cliente.nombre}"?`
+    );
+
+    if (!confirmar) return;
+
+    const nuevosClientes = clientes.filter(
+        (item) => Number(item.id) !== Number(id)
+    );
+
+    guardarClientes(nuevosClientes);
+
+    mostrarClientes();
+    mostrarConsultaRelacionada();
+    actualizarContadores();
+}
 
 
 // ==========================================================
-// ELEMENTOS DE AUTENTICACIÓN
+// FORMULARIO DE PRODUCTOS
 // ==========================================================
 
-const formularioRegistro =
-    document.getElementById("formRegistro");
+document
+    .getElementById("formProducto")
+    ?.addEventListener("submit", function (evento) {
 
-const formularioLogin =
-    document.getElementById("formLogin");
+        evento.preventDefault();
 
-const mensajeRegistro =
-    document.getElementById("mensajeRegistro");
+        const id = document.getElementById("idProducto").value;
+        const nombre = document.getElementById("nombreProducto").value.trim();
+        const categoria = document.getElementById("categoriaProducto").value.trim();
+        const precio = Number(document.getElementById("precioProducto").value);
+        const stock = Number(document.getElementById("stockProducto").value);
 
-const mensajeLogin =
-    document.getElementById("mensajeLogin");
+        if (!nombre || !categoria) {
+            alert("Complete todos los campos obligatorios.");
+            return;
+        }
 
-const panelAutenticacion =
-    document.getElementById("panelAutenticacion");
+        if (precio < 0 || Number.isNaN(precio)) {
+            alert("Ingrese un precio válido.");
+            return;
+        }
 
-const usuarioConectado =
-    document.getElementById("usuarioConectado");
+        if (stock < 0 || Number.isNaN(stock)) {
+            alert("Ingrese un stock válido.");
+            return;
+        }
 
-const nombreUsuarioActual =
-    document.getElementById("nombreUsuarioActual");
+        const productos = obtenerProductos();
 
+        if (id) {
 
-// ==========================================================
-// REGISTRO DE USUARIO
-// ==========================================================
+            const indice = productos.findIndex(
+                (producto) =>
+                    Number(producto.id) === Number(id)
+            );
 
-if (formularioRegistro) {
-
-    formularioRegistro.addEventListener(
-        "submit",
-        function (evento) {
-
-            evento.preventDefault();
-
-
-            const usuario =
-                document
-                    .getElementById("usuarioRegistro")
-                    .value
-                    .trim();
-
-
-            const password =
-                document
-                    .getElementById("passwordRegistro")
-                    .value;
-
-
-            if (usuario.length < 3) {
-
-                mostrarMensajeAuth(
-                    mensajeRegistro,
-                    "El usuario debe tener al menos 3 caracteres.",
-                    "danger"
-                );
-
-                return;
+            if (indice !== -1) {
+                productos[indice] = {
+                    id: Number(id),
+                    nombre,
+                    categoria,
+                    precio,
+                    stock
+                };
             }
 
+        } else {
 
-            if (password.length < 6) {
+            const nuevoProducto = {
+                id:
+                    productos.length > 0
+                        ? Math.max(
+                            ...productos.map(
+                                (producto) => Number(producto.id)
+                            )
+                        ) + 1
+                        : 1,
 
-                mostrarMensajeAuth(
-                    mensajeRegistro,
-                    "La contraseña debe tener al menos 6 caracteres.",
-                    "danger"
-                );
+                nombre,
+                categoria,
+                precio,
+                stock
+            };
 
-                return;
+            productos.push(nuevoProducto);
+        }
+
+        guardarProductos(productos);
+
+        limpiarFormularioProducto();
+        mostrarProductos();
+        mostrarConsultaRelacionada();
+        actualizarContadores();
+
+        const mensaje = document.getElementById("mensajeProducto");
+
+        mostrarMensaje(
+            mensaje,
+            id
+                ? "Producto actualizado correctamente."
+                : "Producto registrado correctamente."
+        );
+    });
+
+
+// ==========================================================
+// FORMULARIO DE PROVEEDORES
+// ==========================================================
+
+document
+    .getElementById("formProveedor")
+    ?.addEventListener("submit", function (evento) {
+
+        evento.preventDefault();
+
+        const id = document.getElementById("idProveedor").value;
+        const nombre = document.getElementById("nombreProveedor").value.trim();
+        const telefono = document.getElementById("telefonoProveedor").value.trim();
+        const correo = document.getElementById("correoProveedor").value.trim();
+
+        if (!nombre || !telefono || !correo) {
+            alert("Complete todos los campos del proveedor.");
+            return;
+        }
+
+        const proveedores = obtenerProveedores();
+
+        if (id) {
+
+            const indice = proveedores.findIndex(
+                (proveedor) =>
+                    Number(proveedor.id) === Number(id)
+            );
+
+            if (indice !== -1) {
+                proveedores[indice] = {
+                    id: Number(id),
+                    nombre,
+                    telefono,
+                    correo
+                };
             }
 
+        } else {
 
-            const existe =
-                usuarios.some(
-                    function (item) {
+            const nuevoProveedor = {
+                id:
+                    proveedores.length > 0
+                        ? Math.max(
+                            ...proveedores.map(
+                                (proveedor) => Number(proveedor.id)
+                            )
+                        ) + 1
+                        : 1,
 
-                        return (
-                            item.usuario.toLowerCase() ===
-                            usuario.toLowerCase()
-                        );
+                nombre,
+                telefono,
+                correo
+            };
 
-                    }
-                );
+            proveedores.push(nuevoProveedor);
+        }
+
+        guardarProveedores(proveedores);
+
+        limpiarFormularioProveedor();
+        mostrarProveedores();
+        mostrarConsultaRelacionada();
+        actualizarContadores();
+
+        mostrarMensaje(
+            document.getElementById("mensajeProveedor"),
+            id
+                ? "Proveedor actualizado correctamente."
+                : "Proveedor registrado correctamente."
+        );
+    });
 
 
-            if (existe) {
+// ==========================================================
+// FORMULARIO DE CLIENTES
+// ==========================================================
 
-                mostrarMensajeAuth(
-                    mensajeRegistro,
-                    "El usuario ya existe.",
-                    "danger"
-                );
+document
+    .getElementById("formCliente")
+    ?.addEventListener("submit", function (evento) {
 
-                return;
+        evento.preventDefault();
+
+        const id = document.getElementById("idCliente").value;
+        const nombre = document.getElementById("nombreCliente").value.trim();
+        const correo = document.getElementById("correoCliente").value.trim();
+        const telefono = document.getElementById("telefonoCliente").value.trim();
+
+        if (!nombre || !correo || !telefono) {
+            alert("Complete todos los campos del cliente.");
+            return;
+        }
+
+        const clientes = obtenerClientes();
+
+        if (id) {
+
+            const indice = clientes.findIndex(
+                (cliente) =>
+                    Number(cliente.id) === Number(id)
+            );
+
+            if (indice !== -1) {
+                clientes[indice] = {
+                    id: Number(id),
+                    nombre,
+                    correo,
+                    telefono
+                };
             }
 
+        } else {
 
-            usuarios.push({
+            const nuevoCliente = {
+                id:
+                    clientes.length > 0
+                        ? Math.max(
+                            ...clientes.map(
+                                (cliente) => Number(cliente.id)
+                            )
+                        ) + 1
+                        : 1,
 
-                usuario: usuario,
-                password: password
+                nombre,
+                correo,
+                telefono
+            };
 
+            clientes.push(nuevoCliente);
+        }
+
+        guardarClientes(clientes);
+
+        limpiarFormularioCliente();
+        mostrarClientes();
+        mostrarConsultaRelacionada();
+        actualizarContadores();
+
+        mostrarMensaje(
+            document.getElementById("mensajeCliente"),
+            id
+                ? "Cliente actualizado correctamente."
+                : "Cliente registrado correctamente."
+        );
+    });
+
+
+// ==========================================================
+// BÚSQUEDAS
+// ==========================================================
+
+document
+    .getElementById("busquedaProductos")
+    ?.addEventListener("input", mostrarProductos);
+
+document
+    .getElementById("busquedaProveedores")
+    ?.addEventListener("input", mostrarProveedores);
+
+document
+    .getElementById("busquedaClientes")
+    ?.addEventListener("input", mostrarClientes);
+
+
+// ==========================================================
+// BOTONES CANCELAR
+// ==========================================================
+
+document
+    .getElementById("botonCancelarEdicion")
+    ?.addEventListener("click", limpiarFormularioProducto);
+
+document
+    .getElementById("botonCancelarProveedor")
+    ?.addEventListener("click", limpiarFormularioProveedor);
+
+document
+    .getElementById("botonCancelarCliente")
+    ?.addEventListener("click", limpiarFormularioCliente);
+
+
+// ==========================================================
+// CONSULTA RELACIONADA
+// ==========================================================
+
+function mostrarConsultaRelacionada() {
+
+    const tabla = document.getElementById("tablaRelaciones");
+    const contador = document.getElementById("contadorRelaciones");
+    const sinRelaciones = document.getElementById("sinRelaciones");
+
+    if (!tabla) return;
+
+    const productos = obtenerProductos();
+    const proveedores = obtenerProveedores();
+    const clientes = obtenerClientes();
+
+    tabla.innerHTML = "";
+
+    if (
+        productos.length === 0 ||
+        proveedores.length === 0 ||
+        clientes.length === 0
+    ) {
+
+        if (contador) {
+            contador.textContent = "0";
+        }
+
+        if (sinRelaciones) {
+            sinRelaciones.style.display = "block";
+        }
+
+        return;
+    }
+
+    if (sinRelaciones) {
+        sinRelaciones.style.display = "none";
+    }
+
+    productos.forEach((producto) => {
+
+        const proveedor = proveedores[0];
+        const cliente = clientes[0];
+
+        tabla.innerHTML += `
+            <tr>
+                <td>
+                    ${escaparHTML(producto.nombre)}
+                </td>
+
+                <td>
+                    ${escaparHTML(proveedor.nombre)}
+                </td>
+
+                <td>
+                    ${escaparHTML(cliente.nombre)}
+                </td>
+
+                <td>
+                    $${Number(producto.precio).toFixed(2)}
+                </td>
+            </tr>
+        `;
+    });
+
+    if (contador) {
+        contador.textContent = productos.length;
+    }
+}
+
+
+// ==========================================================
+// BOTÓN CONSULTA RELACIONADA
+// ==========================================================
+
+document
+    .getElementById("botonConsultaRelacionada")
+    ?.addEventListener("click", function () {
+
+        mostrarConsultaRelacionada();
+
+        document
+            .getElementById("tablaRelaciones")
+            ?.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
             });
+    });
 
 
-            localStorage.setItem(
-                "tecnoSolucionesUsuarios",
-                JSON.stringify(usuarios)
-            );
+// ==========================================================
+// CONTADORES
+// ==========================================================
 
+function actualizarContadores() {
 
-            formularioRegistro.reset();
+    const productos = obtenerProductos();
+    const proveedores = obtenerProveedores();
+    const clientes = obtenerClientes();
 
+    const contadorProductos =
+        document.getElementById("contadorProductos");
 
-            mostrarMensajeAuth(
-                mensajeRegistro,
-                "Usuario registrado correctamente. Ahora puede iniciar sesión.",
-                "success"
-            );
-        }
-    );
+    const contadorProveedores =
+        document.getElementById("contadorProveedores");
+
+    const contadorClientes =
+        document.getElementById("contadorClientes");
+
+    if (contadorProductos) {
+        contadorProductos.textContent = productos.length;
+    }
+
+    if (contadorProveedores) {
+        contadorProveedores.textContent = proveedores.length;
+    }
+
+    if (contadorClientes) {
+        contadorClientes.textContent = clientes.length;
+    }
 }
 
 
 // ==========================================================
-// INICIO DE SESIÓN
+// USUARIOS
 // ==========================================================
 
-if (formularioLogin) {
-
-    formularioLogin.addEventListener(
-        "submit",
-        function (evento) {
-
-            evento.preventDefault();
-
-
-            const usuario =
-                document
-                    .getElementById("usuarioLogin")
-                    .value
-                    .trim();
-
-
-            const password =
-                document
-                    .getElementById("passwordLogin")
-                    .value;
-
-
-            const encontrado =
-                usuarios.find(
-                    function (item) {
-
-                        return (
-                            item.usuario.toLowerCase() ===
-                            usuario.toLowerCase() &&
-                            item.password === password
-                        );
-
-                    }
-                );
-
-
-            if (!encontrado) {
-
-                mostrarMensajeAuth(
-                    mensajeLogin,
-                    "Usuario o contraseña incorrectos.",
-                    "danger"
-                );
-
-                return;
-            }
-
-
-            usuarioActual =
-                encontrado.usuario;
-
-
-            localStorage.setItem(
-                "tecnoSolucionesUsuarioActual",
-                usuarioActual
-            );
-
-
-            formularioLogin.reset();
-
-            actualizarSesion();
-
-
-            mostrarMensajeAuth(
-                mensajeLogin,
-                "Inicio de sesión correcto.",
-                "success"
-            );
-        }
-    );
+function obtenerUsuarios() {
+    return obtenerDatos("tecnoSolucionesUsuarios");
 }
 
-
-// ==========================================================
-// MOSTRAR SESIÓN
-// ==========================================================
+function guardarUsuarios(usuarios) {
+    guardarDatos("tecnoSolucionesUsuarios", usuarios);
+}
 
 function actualizarSesion() {
 
-    if (
-        !usuarioConectado ||
-        !panelAutenticacion
-    ) {
+    const usuarioActual =
+        localStorage.getItem("tecnoSolucionesUsuarioActual");
 
-        return;
-    }
+    const contenidoAutenticacion =
+        document.getElementById("contenidoAutenticacion");
 
+    const panelAutenticacion =
+        document.getElementById("panelAutenticacion");
 
-    if (usuarioActual !== "") {
+    const nombreUsuarioActual =
+        document.getElementById("nombreUsuarioActual");
 
-        panelAutenticacion.classList.add(
-            "d-none"
-        );
+    if (usuarioActual) {
 
-        usuarioConectado.classList.remove(
-            "d-none"
-        );
+        if (contenidoAutenticacion) {
+            contenidoAutenticacion.style.display = "none";
+        }
 
+        if (panelAutenticacion) {
+            panelAutenticacion.style.display = "block";
+        }
 
         if (nombreUsuarioActual) {
-
-            nombreUsuarioActual.textContent =
-                usuarioActual;
+            nombreUsuarioActual.textContent = usuarioActual;
         }
 
     } else {
 
-        panelAutenticacion.classList.remove(
-            "d-none"
-        );
+        if (contenidoAutenticacion) {
+            contenidoAutenticacion.style.display = "block";
+        }
 
-        usuarioConectado.classList.add(
-            "d-none"
-        );
+        if (panelAutenticacion) {
+            panelAutenticacion.style.display = "none";
+        }
     }
 }
+
+
+// ==========================================================
+// REGISTRO
+// ==========================================================
+
+document
+    .getElementById("formRegistro")
+    ?.addEventListener("submit", function (evento) {
+
+        evento.preventDefault();
+
+        const usuario =
+            document.getElementById("usuarioRegistro").value.trim();
+
+        const password =
+            document.getElementById("passwordRegistro").value;
+
+        if (!usuario || !password) {
+            alert("Ingrese usuario y contraseña.");
+            return;
+        }
+
+        const usuarios = obtenerUsuarios();
+
+        const existe = usuarios.some(
+            (item) =>
+                item.usuario.toLowerCase() === usuario.toLowerCase()
+        );
+
+        if (existe) {
+
+            mostrarMensaje(
+                document.getElementById("mensajeRegistro"),
+                "El usuario ya existe.",
+                "danger"
+            );
+
+            return;
+        }
+
+        usuarios.push({
+            id:
+                usuarios.length > 0
+                    ? Math.max(
+                        ...usuarios.map(
+                            (item) => Number(item.id)
+                        )
+                    ) + 1
+                    : 1,
+
+            usuario,
+            password
+        });
+
+        guardarUsuarios(usuarios);
+
+        document.getElementById("formRegistro").reset();
+
+        mostrarMensaje(
+            document.getElementById("mensajeRegistro"),
+            "Usuario registrado correctamente."
+        );
+    });
+
+
+// ==========================================================
+// LOGIN
+// ==========================================================
+
+document
+    .getElementById("formLogin")
+    ?.addEventListener("submit", function (evento) {
+
+        evento.preventDefault();
+
+        const usuario =
+            document.getElementById("usuarioLogin").value.trim();
+
+        const password =
+            document.getElementById("passwordLogin").value;
+
+        const usuarios = obtenerUsuarios();
+
+        const encontrado = usuarios.find(
+            (item) =>
+                item.usuario === usuario &&
+                item.password === password
+        );
+
+        if (!encontrado) {
+
+            mostrarMensaje(
+                document.getElementById("mensajeLogin"),
+                "Usuario o contraseña incorrectos.",
+                "danger"
+            );
+
+            return;
+        }
+
+        localStorage.setItem(
+            "tecnoSolucionesUsuarioActual",
+            encontrado.usuario
+        );
+
+        document.getElementById("formLogin").reset();
+
+        actualizarSesion();
+    });
 
 
 // ==========================================================
 // CERRAR SESIÓN
 // ==========================================================
 
-function cerrarSesion() {
+document
+    .getElementById("botonCerrarSesion")
+    ?.addEventListener("click", function () {
 
-    usuarioActual = "";
-
-    localStorage.removeItem(
-        "tecnoSolucionesUsuarioActual"
-    );
-
-
-    actualizarSesion();
-
-
-    if (mensajeLogin) {
-
-        mostrarMensajeAuth(
-            mensajeLogin,
-            "Sesión cerrada correctamente.",
-            "success"
+        localStorage.removeItem(
+            "tecnoSolucionesUsuarioActual"
         );
-    }
-}
 
-
-// ==========================================================
-// MENSAJES DE AUTENTICACIÓN
-// ==========================================================
-
-function mostrarMensajeAuth(
-    elemento,
-    texto,
-    tipo
-) {
-
-    if (!elemento) {
-        return;
-    }
-
-
-    elemento.innerHTML = `
-        <div class="alert alert-${tipo}">
-            ${texto}
-        </div>
-    `;
-}
+        actualizarSesion();
+    });
 
 
 // ==========================================================
 // FORMULARIO DE CONTACTO
 // ==========================================================
 
-const formularioServicio =
-    document.getElementById("formServicio");
+document
+    .getElementById("formServicio")
+    ?.addEventListener("submit", function (evento) {
 
-const mensajeContacto =
-    document.getElementById("mensajeContacto");
+        evento.preventDefault();
 
+        const nombre =
+            document.getElementById("nombre").value.trim();
 
-if (formularioServicio) {
+        const correo =
+            document.getElementById("correo").value.trim();
 
-    formularioServicio.addEventListener(
-        "submit",
-        function (evento) {
+        const servicio =
+            document.getElementById("servicio").value;
 
-            evento.preventDefault();
+        const detalle =
+            document.getElementById("detalleSolicitud").value.trim();
 
+        if (!nombre || !correo || !servicio || !detalle) {
 
-            const nombre =
-                document
-                    .getElementById("nombre")
-                    .value
-                    .trim();
+            mostrarMensaje(
+                document.getElementById("mensajeContacto"),
+                "Complete todos los campos.",
+                "danger"
+            );
 
-
-            const correo =
-                document
-                    .getElementById("correo")
-                    .value
-                    .trim();
-
-
-            const servicio =
-                document
-                    .getElementById("servicio")
-                    .value;
-
-
-            const detalle =
-                document
-                    .getElementById("detalleSolicitud")
-                    .value
-                    .trim();
-
-
-            if (
-                nombre === "" ||
-                correo === "" ||
-                servicio === "" ||
-                detalle === ""
-            ) {
-
-                if (mensajeContacto) {
-
-                    mensajeContacto.innerHTML = `
-                        <div class="alert alert-danger">
-                            Complete todos los campos del formulario.
-                        </div>
-                    `;
-                }
-
-                return;
-            }
-
-
-            if (mensajeContacto) {
-
-                mensajeContacto.innerHTML = `
-                    <div class="alert alert-success">
-                        <strong>Solicitud enviada correctamente.</strong><br>
-                        Gracias ${nombre}. Hemos recibido su solicitud de ${servicio}.
-                    </div>
-                `;
-            }
-
-
-            formularioServicio.reset();
+            return;
         }
-    );
-}
+
+        mostrarMensaje(
+            document.getElementById("mensajeContacto"),
+            "Solicitud enviada correctamente."
+        );
+
+        document.getElementById("formServicio").reset();
+    });
 
 
 // ==========================================================
 // INICIALIZACIÓN
 // ==========================================================
 
-mostrarServicios();
+document.addEventListener("DOMContentLoaded", function () {
 
-mostrarProductos();
+    mostrarServicios();
 
-actualizarSesion();
+    mostrarProductos();
+
+    mostrarProveedores();
+
+    mostrarClientes();
+
+    mostrarConsultaRelacionada();
+
+    actualizarContadores();
+
+    actualizarSesion();
+
+});
+```
