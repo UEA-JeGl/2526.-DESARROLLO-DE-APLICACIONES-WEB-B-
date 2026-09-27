@@ -1,90 +1,220 @@
-// ==========================================================
-// TECNOSOLUCIONES
-// SEMANAS 13 Y 14
-// CRUD DE PRODUCTOS Y AUTENTICACIÓN
-// ==========================================================
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>TecnoSoluciones</title>
+
+    <meta name="description"
+          content="TecnoSoluciones - Servicios tecnológicos, desarrollo web, soporte técnico, capacitación y consultoría.">
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="static/css/estilos.css">
+
+</head>
 
 
-// ==========================================================
-// SERVICIOS
-// ==========================================================
-
-const servicios = [
-
-    {
-        nombre: "Desarrollo Web",
-        descripcion:
-            "Diseñamos sitios web modernos, funcionales y adaptables a diferentes dispositivos.",
-        color: "primary"
-    },
-
-    {
-        nombre: "Soporte Técnico",
-        descripcion:
-            "Ofrecemos mantenimiento preventivo y correctivo para equipos informáticos.",
-        color: "success"
-    },
-
-    {
-        nombre: "Capacitación",
-        descripcion:
-            "Realizamos cursos y asesorías sobre herramientas digitales y tecnología.",
-        color: "warning"
-    },
-
-    {
-        nombre: "Consultoría",
-        descripcion:
-            "Brindamos asesoramiento tecnológico para empresas y emprendedores.",
-        color: "info"
-    }
-
-];
+<body>
 
 
-// ==========================================================
-// MOSTRAR SERVICIOS
-// ==========================================================
+<!-- ====================================================== -->
+<!-- NAVBAR -->
+<!-- ====================================================== -->
 
-function mostrarServicios() {
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
 
-    const contenedorServicios =
-        document.getElementById("contenedorServicios");
+    <div class="container">
 
-    if (!contenedorServicios) {
-        return;
-    }
+        <a class="navbar-brand fw-bold"
+           href="#inicio">
 
-    contenedorServicios.innerHTML = "";
+            <img
+                src="static/img/logo.svg"
+                alt="Logo TecnoSoluciones"
+                width="40"
+                height="40"
+                class="me-2">
 
-    servicios.forEach(function(servicio) {
+            TecnoSoluciones
 
-        contenedorServicios.innerHTML += `
+        </a>
 
-            <div class="col-md-6 col-lg-3">
 
-                <div class="card shadow h-100">
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#menuPrincipal">
 
-                    <div class="card-body text-center">
+            <span class="navbar-toggler-icon"></span>
 
-                        <h5 class="card-title">
-                            ${servicio.nombre}
-                        </h5>
+        </button>
 
-                        <p class="card-text">
-                            ${servicio.descripcion}
+
+        <div
+            class="collapse navbar-collapse"
+            id="menuPrincipal">
+
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="#inicio">
+                        Inicio
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="#quienes-somos">
+                        Quiénes Somos
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="#servicios">
+                        Servicios
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="#productos">
+                        Productos
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="#autenticacion">
+                        Usuarios
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link"
+                       href="#contacto">
+                        Contacto
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- ====================================================== -->
+<!-- INICIO -->
+<!-- ====================================================== -->
+
+<section id="inicio"
+         class="py-5">
+
+    <div class="container">
+
+        <div class="row align-items-center">
+
+            <div class="col-lg-6">
+
+                <h1 class="display-5 fw-bold text-primary">
+                    Soluciones tecnológicas para tu negocio
+                </h1>
+
+                <p class="lead mt-3">
+                    En TecnoSoluciones ofrecemos servicios de
+                    desarrollo web, soporte técnico, capacitación
+                    y consultoría tecnológica.
+                </p>
+
+                <a href="#servicios"
+                   class="btn btn-primary btn-lg">
+
+                    Conocer nuestros servicios
+
+                </a>
+
+            </div>
+
+
+            <div class="col-lg-6 text-center mt-4 mt-lg-0">
+
+                <img
+                    src="static/img/tecnologia.svg"
+                    alt="Tecnología"
+                    class="img-fluid"
+                    style="max-height: 350px;">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ====================================================== -->
+<!-- QUIÉNES SOMOS -->
+<!-- ====================================================== -->
+
+<section id="quienes-somos"
+         class="py-5 bg-light">
+
+    <div class="container">
+
+        <div class="text-center mb-4">
+
+            <h2 class="fw-bold text-primary">
+                Quiénes Somos
+            </h2>
+
+            <p class="lead">
+                Tecnología al servicio de nuestros clientes.
+            </p>
+
+        </div>
+
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-9">
+
+                <div class="card border-0 shadow-sm">
+
+                    <div class="card-body p-4">
+
+                        <p>
+                            TecnoSoluciones es un proyecto orientado
+                            a ofrecer servicios tecnológicos para
+                            empresas, emprendedores y usuarios.
                         </p>
 
-                        <button
-                            class="btn btn-${servicio.color}"
-                            onclick="mostrarDetalle(
-                                '${servicio.nombre}',
-                                '${servicio.descripcion}'
-                            )">
+                        <p>
+                            Nuestro objetivo es proporcionar
+                            soluciones prácticas mediante el uso
+                            de herramientas informáticas y
+                            tecnologías web.
+                        </p>
 
-                            Ver detalles
-
-                        </button>
+                        <p class="mb-0">
+                            Trabajamos con desarrollo web, soporte
+                            técnico, capacitación y consultoría.
+                        </p>
 
                     </div>
 
@@ -92,1270 +222,789 @@ function mostrarServicios() {
 
             </div>
 
-        `;
+        </div>
 
-    });
+    </div>
 
-}
+</section>
 
 
-// ==========================================================
-// DETALLE DEL SERVICIO
-// ==========================================================
+<!-- ====================================================== -->
+<!-- SERVICIOS -->
+<!-- ====================================================== -->
 
-function mostrarDetalle(nombre, descripcion) {
+<section id="servicios"
+         class="py-5">
 
-    alert(
-        nombre +
-        "\n\n" +
-        descripcion
-    );
+    <div class="container">
 
-}
+        <div class="text-center mb-5">
 
+            <h2 class="fw-bold text-primary">
+                Nuestros Servicios
+            </h2>
 
-// ==========================================================
-// SEMANA 13
-// CRUD DE PRODUCTOS
-// ==========================================================
+            <p>
+                Conoce las soluciones que ofrecemos.
+            </p>
 
-let productos =
-    JSON.parse(
-        localStorage.getItem(
-            "tecnoSolucionesProductos"
-        )
-    ) || [];
+        </div>
 
 
-// Si no existen productos, colocar el producto utilizado
-// durante la Semana 13 como ejemplo inicial.
-
-if (productos.length === 0) {
-
-    productos.push({
-
-        id: 1,
-
-        nombre: "Taladro Eléctrico",
-
-        categoria: "Herramientas",
-
-        precio: 85.50,
-
-        stock: 15
-
-    });
-
-    localStorage.setItem(
-
-        "tecnoSolucionesProductos",
-
-        JSON.stringify(productos)
-
-    );
-
-}
-
-
-// ==========================================================
-// ELEMENTOS DEL HTML
-// ==========================================================
-
-const formularioProducto =
-    document.getElementById("formProducto");
-
-const tablaProductos =
-    document.getElementById("tablaProductos");
-
-const contadorProductos =
-    document.getElementById("contadorProductos");
-
-const mensajeProducto =
-    document.getElementById("mensajeProducto");
-
-const sinProductos =
-    document.getElementById("sinProductos");
-
-const idProducto =
-    document.getElementById("idProducto");
-
-const tituloFormularioProducto =
-    document.getElementById("tituloFormularioProducto");
-
-const botonGuardarProducto =
-    document.getElementById("botonGuardarProducto");
-
-const botonCancelarEdicion =
-    document.getElementById("botonCancelarEdicion");
-
-
-// ==========================================================
-// MOSTRAR PRODUCTOS
-// ==========================================================
-
-function mostrarProductos() {
-
-    if (!tablaProductos) {
-        return;
-    }
-
-    tablaProductos.innerHTML = "";
-
-    if (contadorProductos) {
-
-        contadorProductos.textContent =
-            productos.length;
-
-    }
-
-
-    if (productos.length === 0) {
-
-        if (sinProductos) {
-
-            sinProductos.style.display =
-                "block";
-
-        }
-
-        return;
-
-    }
-
-
-    if (sinProductos) {
-
-        sinProductos.style.display =
-            "none";
-
-    }
-
-
-    productos.forEach(function(producto) {
-
-        const estado =
-            Number(producto.stock) > 0
-                ? "Disponible"
-                : "Agotado";
-
-
-        const claseEstado =
-            Number(producto.stock) > 0
-                ? "success"
-                : "danger";
-
-
-        tablaProductos.innerHTML += `
-
-            <tr>
-
-                <td>
-                    ${producto.id}
-                </td>
-
-                <td>
-                    ${producto.nombre}
-                </td>
-
-                <td>
-                    ${producto.categoria}
-                </td>
-
-                <td>
-                    $${Number(producto.precio).toFixed(2)}
-                </td>
-
-                <td>
-                    ${producto.stock}
-                </td>
-
-                <td>
-
-                    <span class="badge bg-${claseEstado}">
-                        ${estado}
-                    </span>
-
-                </td>
-
-                <td>
-
-                    <button
-                        type="button"
-                        class="btn btn-warning btn-sm"
-                        onclick="editarProducto(${producto.id})">
-
-                        Editar
-
-                    </button>
-
-
-                    <button
-                        type="button"
-                        class="btn btn-danger btn-sm"
-                        onclick="eliminarProducto(${producto.id})">
-
-                        Eliminar
-
-                    </button>
-
-                </td>
-
-            </tr>
-
-        `;
-
-    });
-
-}
-
-
-// ==========================================================
-// GUARDAR PRODUCTOS
-// ==========================================================
-
-function guardarProductos() {
-
-    localStorage.setItem(
-
-        "tecnoSolucionesProductos",
-
-        JSON.stringify(productos)
-
-    );
-
-}
-
-
-// ==========================================================
-// REGISTRAR / ACTUALIZAR PRODUCTO
-// ==========================================================
-
-if (formularioProducto) {
-
-    formularioProducto.addEventListener(
-
-        "submit",
-
-        function(evento) {
-
-            evento.preventDefault();
-
-
-            const nombre =
-                document
-                    .getElementById("nombreProducto")
-                    .value
-                    .trim();
-
-
-            const categoria =
-                document
-                    .getElementById("categoriaProducto")
-                    .value
-                    .trim();
-
-
-            const precio =
-                parseFloat(
-                    document
-                        .getElementById("precioProducto")
-                        .value
-                );
-
-
-            const stock =
-                parseInt(
-                    document
-                        .getElementById("stockProducto")
-                        .value
-                );
-
-
-            if (
-
-                nombre === "" ||
-
-                categoria === "" ||
-
-                isNaN(precio) ||
-
-                isNaN(stock)
-
-            ) {
-
-                mostrarMensajeProducto(
-
-                    "Complete todos los campos.",
-
-                    "danger"
-
-                );
-
-                return;
-
-            }
-
-
-            if (precio < 0) {
-
-                mostrarMensajeProducto(
-
-                    "El precio no puede ser negativo.",
-
-                    "danger"
-
-                );
-
-                return;
-
-            }
-
-
-            if (stock < 0) {
-
-                mostrarMensajeProducto(
-
-                    "El stock no puede ser negativo.",
-
-                    "danger"
-
-                );
-
-                return;
-
-            }
-
-
-            // ==================================================
-            // EDITAR PRODUCTO
-            // ==================================================
-
-            if (
-
-                idProducto &&
-
-                idProducto.value !== ""
-
-            ) {
-
-                const id =
-                    Number(idProducto.value);
-
-
-                const indice =
-                    productos.findIndex(
-
-                        function(producto) {
-
-                            return producto.id === id;
-
-                        }
-
-                    );
-
-
-                if (indice !== -1) {
-
-                    productos[indice] = {
-
-                        id: id,
-
-                        nombre: nombre,
-
-                        categoria: categoria,
-
-                        precio: precio,
-
-                        stock: stock
-
-                    };
-
-
-                    guardarProductos();
-
-                    mostrarProductos();
-
-                    cancelarEdicion();
-
-
-                    mostrarMensajeProducto(
-
-                        "Producto actualizado correctamente.",
-
-                        "success"
-
-                    );
-
-                }
-
-
-                return;
-
-            }
-
-
-            // ==================================================
-            // NUEVO PRODUCTO
-            // ==================================================
-
-            let nuevoId = 1;
-
-
-            if (productos.length > 0) {
-
-                nuevoId =
-
-                    Math.max(
-
-                        ...productos.map(
-
-                            function(producto) {
-
-                                return Number(producto.id);
-
-                            }
-
-                        )
-
-                    ) + 1;
-
-            }
-
-
-            const nuevoProducto = {
-
-                id: nuevoId,
-
-                nombre: nombre,
-
-                categoria: categoria,
-
-                precio: precio,
-
-                stock: stock
-
-            };
-
-
-            productos.push(nuevoProducto);
-
-
-            guardarProductos();
-
-            mostrarProductos();
-
-
-            formularioProducto.reset();
-
-
-            mostrarMensajeProducto(
-
-                "Producto registrado correctamente.",
-
-                "success"
-
-            );
-
-        }
-
-    );
-
-}
-
-
-// ==========================================================
-// EDITAR PRODUCTO
-// ==========================================================
-
-function editarProducto(id) {
-
-    const producto =
-
-        productos.find(
-
-            function(item) {
-
-                return item.id === id;
-
-            }
-
-        );
-
-
-    if (!producto) {
-
-        return;
-
-    }
-
-
-    document.getElementById(
-        "nombreProducto"
-    ).value = producto.nombre;
-
-
-    document.getElementById(
-        "categoriaProducto"
-    ).value = producto.categoria;
-
-
-    document.getElementById(
-        "precioProducto"
-    ).value = producto.precio;
-
-
-    document.getElementById(
-        "stockProducto"
-    ).value = producto.stock;
-
-
-    if (idProducto) {
-
-        idProducto.value =
-            producto.id;
-
-    }
-
-
-    if (tituloFormularioProducto) {
-
-        tituloFormularioProducto.textContent =
-            "Editar Producto";
-
-    }
-
-
-    if (botonGuardarProducto) {
-
-        botonGuardarProducto.textContent =
-            "Actualizar Producto";
-
-        botonGuardarProducto.classList.remove(
-            "btn-success"
-        );
-
-        botonGuardarProducto.classList.add(
-            "btn-warning"
-        );
-
-    }
-
-
-    if (botonCancelarEdicion) {
-
-        botonCancelarEdicion.classList.remove(
-            "d-none"
-        );
-
-    }
-
-}
-
-
-// ==========================================================
-// CANCELAR EDICIÓN
-// ==========================================================
-
-function cancelarEdicion() {
-
-    if (!formularioProducto) {
-
-        return;
-
-    }
-
-
-    formularioProducto.reset();
-
-
-    if (idProducto) {
-
-        idProducto.value = "";
-
-    }
-
-
-    if (tituloFormularioProducto) {
-
-        tituloFormularioProducto.textContent =
-            "Registrar Producto";
-
-    }
-
-
-    if (botonGuardarProducto) {
-
-        botonGuardarProducto.textContent =
-            "Guardar Producto";
-
-        botonGuardarProducto.classList.remove(
-            "btn-warning"
-        );
-
-        botonGuardarProducto.classList.add(
-            "btn-success"
-        );
-
-    }
-
-
-    if (botonCancelarEdicion) {
-
-        botonCancelarEdicion.classList.add(
-            "d-none"
-        );
-
-    }
-
-}
-
-
-// ==========================================================
-// ELIMINAR PRODUCTO
-// ==========================================================
-
-function eliminarProducto(id) {
-
-    const confirmar =
-
-        confirm(
-            "¿Está seguro de eliminar este producto?"
-        );
-
-
-    if (!confirmar) {
-
-        return;
-
-    }
-
-
-    productos =
-
-        productos.filter(
-
-            function(producto) {
-
-                return producto.id !== id;
-
-            }
-
-        );
-
-
-    guardarProductos();
-
-    mostrarProductos();
-
-
-    mostrarMensajeProducto(
-
-        "Producto eliminado correctamente.",
-
-        "warning"
-
-    );
-
-}
-
-
-// ==========================================================
-// MENSAJES DE PRODUCTOS
-// ==========================================================
-
-function mostrarMensajeProducto(
-
-    texto,
-
-    tipo
-
-) {
-
-    if (!mensajeProducto) {
-
-        return;
-
-    }
-
-
-    mensajeProducto.innerHTML = `
+        <!-- JavaScript coloca aquí los servicios -->
 
         <div
-            class="alert alert-${tipo}"
-            role="alert">
-
-            ${texto}
+            id="contenedorServicios"
+            class="row g-4">
 
         </div>
 
-    `;
+    </div>
 
+</section>
 
-    setTimeout(
 
-        function() {
+<!-- ====================================================== -->
+<!-- SEMANA 13 - CRUD DE PRODUCTOS -->
+<!-- ====================================================== -->
 
-            mensajeProducto.innerHTML = "";
+<section id="productos"
+         class="py-5 bg-light">
 
-        },
+    <div class="container">
 
-        3000
+        <div class="text-center mb-4">
 
-    );
+            <h2 class="fw-bold text-primary">
+                Semana 13 - Gestión de Productos
+            </h2>
 
-}
-
-
-// ==========================================================
-// SEMANA 14
-// AUTENTICACIÓN DEMOSTRATIVA PARA GITHUB PAGES
-// ==========================================================
-
-let usuarios =
-
-    JSON.parse(
-
-        localStorage.getItem(
-            "tecnoSolucionesUsuarios"
-        )
-
-    ) || [];
-
-
-let usuarioActual =
-
-    localStorage.getItem(
-        "tecnoSolucionesUsuarioActual"
-    ) || "";
-
-
-// ==========================================================
-// ELEMENTOS DE AUTENTICACIÓN
-// ==========================================================
-
-const formularioRegistro =
-    document.getElementById("formRegistro");
-
-const formularioLogin =
-    document.getElementById("formLogin");
-
-const mensajeRegistro =
-    document.getElementById("mensajeRegistro");
-
-const mensajeLogin =
-    document.getElementById("mensajeLogin");
-
-const panelAutenticacion =
-    document.getElementById("panelAutenticacion");
-
-const usuarioConectado =
-    document.getElementById("usuarioConectado");
-
-const nombreUsuarioActual =
-    document.getElementById("nombreUsuarioActual");
-
-
-// ==========================================================
-// REGISTRO DE USUARIO
-// ==========================================================
-
-if (formularioRegistro) {
-
-    formularioRegistro.addEventListener(
-
-        "submit",
-
-        function(evento) {
-
-            evento.preventDefault();
-
-
-            const usuario =
-
-                document
-                    .getElementById(
-                        "usuarioRegistro"
-                    )
-                    .value
-                    .trim();
-
-
-            const password =
-
-                document
-                    .getElementById(
-                        "passwordRegistro"
-                    )
-                    .value;
-
-
-            if (usuario.length < 3) {
-
-                mostrarMensajeAuth(
-
-                    mensajeRegistro,
-
-                    "El usuario debe tener al menos 3 caracteres.",
-
-                    "danger"
-
-                );
-
-                return;
-
-            }
-
-
-            if (password.length < 6) {
-
-                mostrarMensajeAuth(
-
-                    mensajeRegistro,
-
-                    "La contraseña debe tener al menos 6 caracteres.",
-
-                    "danger"
-
-                );
-
-                return;
-
-            }
-
-
-            const existe =
-
-                usuarios.some(
-
-                    function(item) {
-
-                        return (
-
-                            item.usuario.toLowerCase() ===
-
-                            usuario.toLowerCase()
-
-                        );
-
-                    }
-
-                );
-
-
-            if (existe) {
-
-                mostrarMensajeAuth(
-
-                    mensajeRegistro,
-
-                    "El usuario ya existe.",
-
-                    "danger"
-
-                );
-
-                return;
-
-            }
-
-
-            usuarios.push({
-
-                usuario: usuario,
-
-                password: password
-
-            });
-
-
-            localStorage.setItem(
-
-                "tecnoSolucionesUsuarios",
-
-                JSON.stringify(usuarios)
-
-            );
-
-
-            formularioRegistro.reset();
-
-
-            mostrarMensajeAuth(
-
-                mensajeRegistro,
-
-                "Usuario registrado correctamente. Ahora puede iniciar sesión.",
-
-                "success"
-
-            );
-
-        }
-
-    );
-
-}
-
-
-// ==========================================================
-// INICIO DE SESIÓN
-// ==========================================================
-
-if (formularioLogin) {
-
-    formularioLogin.addEventListener(
-
-        "submit",
-
-        function(evento) {
-
-            evento.preventDefault();
-
-
-            const usuario =
-
-                document
-                    .getElementById(
-                        "usuarioLogin"
-                    )
-                    .value
-                    .trim();
-
-
-            const password =
-
-                document
-                    .getElementById(
-                        "passwordLogin"
-                    )
-                    .value;
-
-
-            const encontrado =
-
-                usuarios.find(
-
-                    function(item) {
-
-                        return (
-
-                            item.usuario.toLowerCase() ===
-
-                            usuario.toLowerCase() &&
-
-                            item.password === password
-
-                        );
-
-                    }
-
-                );
-
-
-            if (!encontrado) {
-
-                mostrarMensajeAuth(
-
-                    mensajeLogin,
-
-                    "Usuario o contraseña incorrectos.",
-
-                    "danger"
-
-                );
-
-                return;
-
-            }
-
-
-            usuarioActual =
-                encontrado.usuario;
-
-
-            localStorage.setItem(
-
-                "tecnoSolucionesUsuarioActual",
-
-                usuarioActual
-
-            );
-
-
-            formularioLogin.reset();
-
-
-            actualizarSesion();
-
-
-            mostrarMensajeAuth(
-
-                mensajeLogin,
-
-                "Inicio de sesión correcto.",
-
-                "success"
-
-            );
-
-        }
-
-    );
-
-}
-
-
-// ==========================================================
-// MOSTRAR SESIÓN
-// ==========================================================
-
-function actualizarSesion() {
-
-    if (
-
-        !usuarioConectado ||
-
-        !panelAutenticacion
-
-    ) {
-
-        return;
-
-    }
-
-
-    if (usuarioActual !== "") {
-
-        panelAutenticacion.classList.add(
-            "d-none"
-        );
-
-
-        usuarioConectado.classList.remove(
-            "d-none"
-        );
-
-
-        if (nombreUsuarioActual) {
-
-            nombreUsuarioActual.textContent =
-                usuarioActual;
-
-        }
-
-    }
-
-    else {
-
-        panelAutenticacion.classList.remove(
-            "d-none"
-        );
-
-
-        usuarioConectado.classList.add(
-            "d-none"
-        );
-
-    }
-
-}
-
-
-// ==========================================================
-// CERRAR SESIÓN
-// ==========================================================
-
-function cerrarSesion() {
-
-    usuarioActual = "";
-
-
-    localStorage.removeItem(
-
-        "tecnoSolucionesUsuarioActual"
-
-    );
-
-
-    actualizarSesion();
-
-
-    if (mensajeLogin) {
-
-        mostrarMensajeAuth(
-
-            mensajeLogin,
-
-            "Sesión cerrada correctamente.",
-
-            "success"
-
-        );
-
-    }
-
-}
-
-
-// ==========================================================
-// MENSAJES DE AUTENTICACIÓN
-// ==========================================================
-
-function mostrarMensajeAuth(
-
-    elemento,
-
-    texto,
-
-    tipo
-
-) {
-
-    if (!elemento) {
-
-        return;
-
-    }
-
-
-    elemento.innerHTML = `
-
-        <div class="alert alert-${tipo}">
-
-            ${texto}
+            <p>
+                Registro, consulta, edición y eliminación
+                de productos.
+            </p>
 
         </div>
 
-    `;
 
-}
+        <!-- Aviso -->
 
+        <div class="alert alert-info">
 
-// ==========================================================
-// FORMULARIO DE CONTACTO
-// ==========================================================
+            <strong>Proyecto GitHub Pages:</strong>
 
-const formularioServicio =
-    document.getElementById("formServicio");
+            esta sección utiliza
+            <strong>localStorage</strong>
+            para demostrar el funcionamiento del CRUD.
 
-const mensajeContacto =
-    document.getElementById("mensajeContacto");
+            <br>
 
+            La versión real con MySQL funciona en el
+            proyecto Flask local.
 
-if (formularioServicio) {
-
-    formularioServicio.addEventListener(
-
-        "submit",
-
-        function(evento) {
-
-            evento.preventDefault();
+        </div>
 
 
-            const nombre =
+        <!-- FORMULARIO -->
 
-                document
-                    .getElementById("nombre")
-                    .value
-                    .trim();
+        <div class="card shadow-sm mb-4">
 
+            <div class="card-body">
 
-            const correo =
+                <h4
+                    id="tituloFormularioProducto"
+                    class="card-title mb-4">
 
-                document
-                    .getElementById("correo")
-                    .value
-                    .trim();
+                    Registrar Producto
 
-
-            const servicio =
-
-                document
-                    .getElementById("servicio")
-                    .value;
+                </h4>
 
 
-            const detalle =
+                <form id="formProducto">
 
-                document
-                    .getElementById(
-                        "detalleSolicitud"
-                    )
-                    .value
-                    .trim();
+                    <input
+                        type="hidden"
+                        id="idProducto">
 
 
-            if (
+                    <div class="row g-3">
 
-                nombre === "" ||
+                        <div class="col-md-6">
 
-                correo === "" ||
+                            <label
+                                for="nombreProducto"
+                                class="form-label">
 
-                servicio === "" ||
+                                Nombre del producto
 
-                detalle === ""
+                            </label>
 
-            ) {
-
-                if (mensajeContacto) {
-
-                    mensajeContacto.innerHTML = `
-
-                        <div class="alert alert-danger">
-
-                            Complete todos los campos
-                            del formulario.
+                            <input
+                                type="text"
+                                id="nombreProducto"
+                                class="form-control"
+                                required>
 
                         </div>
 
-                    `;
 
-                }
+                        <div class="col-md-6">
 
-                return;
+                            <label
+                                for="categoriaProducto"
+                                class="form-label">
 
-            }
+                                Categoría
+
+                            </label>
+
+                            <input
+                                type="text"
+                                id="categoriaProducto"
+                                class="form-control"
+                                required>
+
+                        </div>
 
 
-            if (mensajeContacto) {
+                        <div class="col-md-6">
 
-                mensajeContacto.innerHTML = `
+                            <label
+                                for="precioProducto"
+                                class="form-label">
 
-                    <div class="alert alert-success">
+                                Precio
 
-                        <strong>
-                            Solicitud enviada correctamente.
-                        </strong>
+                            </label>
 
-                        <br>
+                            <input
+                                type="number"
+                                id="precioProducto"
+                                class="form-control"
+                                min="0"
+                                step="0.01"
+                                required>
 
-                        Gracias ${nombre}.
-                        Hemos recibido su solicitud
-                        de ${servicio}.
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <label
+                                for="stockProducto"
+                                class="form-label">
+
+                                Stock
+
+                            </label>
+
+                            <input
+                                type="number"
+                                id="stockProducto"
+                                class="form-control"
+                                min="0"
+                                required>
+
+                        </div>
+
+
+                        <div class="col-12">
+
+                            <button
+                                type="submit"
+                                id="botonGuardarProducto"
+                                class="btn btn-success">
+
+                                Guardar Producto
+
+                            </button>
+
+
+                            <button
+                                type="button"
+                                id="botonCancelarEdicion"
+                                class="btn btn-secondary d-none"
+                                onclick="cancelarEdicion()">
+
+                                Cancelar
+
+                            </button>
+
+                        </div>
 
                     </div>
 
-                `;
-
-            }
+                </form>
 
 
-            formularioServicio.reset();
+                <div
+                    id="mensajeProducto"
+                    class="mt-3">
+                </div>
 
-        }
+            </div>
 
-    );
-
-}
+        </div>
 
 
-// ==========================================================
-// INICIALIZACIÓN
-// ==========================================================
+        <!-- CONTADOR -->
 
-mostrarServicios();
+        <div class="mb-3">
 
-mostrarProductos();
+            <span class="badge bg-primary fs-6">
 
-actualizarSesion();
+                Productos registrados:
+
+                <span id="contadorProductos">
+                    0
+                </span>
+
+            </span>
+
+        </div>
+
+
+        <!-- TABLA -->
+
+        <div class="card shadow-sm">
+
+            <div class="card-body">
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle">
+
+                        <thead class="table-primary">
+
+                            <tr>
+
+                                <th>ID</th>
+
+                                <th>Producto</th>
+
+                                <th>Categoría</th>
+
+                                <th>Precio</th>
+
+                                <th>Stock</th>
+
+                                <th>Estado</th>
+
+                                <th>Acciones</th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="tablaProductos">
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+
+                <div
+                    id="sinProductos"
+                    class="alert alert-secondary text-center"
+                    style="display: none;">
+
+                    No existen productos registrados.
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ====================================================== -->
+<!-- SEMANA 14 - AUTENTICACIÓN -->
+<!-- ====================================================== -->
+
+<section id="autenticacion"
+         class="py-5">
+
+    <div class="container">
+
+        <div class="text-center mb-4">
+
+            <h2 class="fw-bold text-primary">
+
+                Semana 14 - Autenticación de Usuarios
+
+            </h2>
+
+            <p>
+
+                Registro e inicio de sesión de usuarios.
+
+            </p>
+
+        </div>
+
+
+        <div class="alert alert-warning">
+
+            <strong>Importante:</strong>
+
+            en GitHub Pages esta autenticación es
+            únicamente una demostración utilizando
+            <strong>localStorage</strong>.
+
+            La autenticación real con
+            <strong>Flask-Login y MySQL</strong>
+            está implementada en el proyecto Flask.
+
+        </div>
+
+
+        <!-- PANEL DE REGISTRO Y LOGIN -->
+
+        <div
+            id="panelAutenticacion"
+            class="row g-4">
+
+
+            <!-- REGISTRO -->
+
+            <div class="col-lg-6">
+
+                <div class="card shadow-sm h-100">
+
+                    <div class="card-body">
+
+                        <h4 class="card-title">
+
+                            Crear cuenta
+
+                        </h4>
+
+
+                        <p class="text-muted">
+
+                            Registre un nuevo usuario.
+
+                        </p>
+
+
+                        <form id="formRegistro">
+
+                            <div class="mb-3">
+
+                                <label
+                                    for="usuarioRegistro"
+                                    class="form-label">
+
+                                    Usuario
+
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="usuarioRegistro"
+                                    class="form-control"
+                                    minlength="3"
+                                    required>
+
+                            </div>
+
+
+                            <div class="mb-3">
+
+                                <label
+                                    for="passwordRegistro"
+                                    class="form-label">
+
+                                    Contraseña
+
+                                </label>
+
+                                <input
+                                    type="password"
+                                    id="passwordRegistro"
+                                    class="form-control"
+                                    minlength="6"
+                                    required>
+
+                            </div>
+
+
+                            <button
+                                type="submit"
+                                class="btn btn-primary">
+
+                                Registrarse
+
+                            </button>
+
+                        </form>
+
+
+                        <div
+                            id="mensajeRegistro"
+                            class="mt-3">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- LOGIN -->
+
+            <div class="col-lg-6">
+
+                <div class="card shadow-sm h-100">
+
+                    <div class="card-body">
+
+                        <h4 class="card-title">
+
+                            Iniciar sesión
+
+                        </h4>
+
+
+                        <p class="text-muted">
+
+                            Acceda con su usuario registrado.
+
+                        </p>
+
+
+                        <form id="formLogin">
+
+                            <div class="mb-3">
+
+                                <label
+                                    for="usuarioLogin"
+                                    class="form-label">
+
+                                    Usuario
+
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="usuarioLogin"
+                                    class="form-control"
+                                    required>
+
+                            </div>
+
+
+                            <div class="mb-3">
+
+                                <label
+                                    for="passwordLogin"
+                                    class="form-label">
+
+                                    Contraseña
+
+                                </label>
+
+                                <input
+                                    type="password"
+                                    id="passwordLogin"
+                                    class="form-control"
+                                    required>
+
+                            </div>
+
+
+                            <button
+                                type="submit"
+                                class="btn btn-success">
+
+                                Iniciar sesión
+
+                            </button>
+
+                        </form>
+
+
+                        <div
+                            id="mensajeLogin"
+                            class="mt-3">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- USUARIO CONECTADO -->
+
+        <div
+            id="usuarioConectado"
+            class="card shadow-sm mt-4 d-none">
+
+            <div class="card-body text-center">
+
+                <h4 class="text-success">
+
+                    Sesión iniciada
+
+                </h4>
+
+
+                <p>
+
+                    Bienvenido/a,
+
+                    <strong id="nombreUsuarioActual"></strong>
+
+                </p>
+
+
+                <button
+                    type="button"
+                    class="btn btn-danger"
+                    onclick="cerrarSesion()">
+
+                    Cerrar sesión
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ====================================================== -->
+<!-- CONTACTO -->
+<!-- ====================================================== -->
+
+<section id="contacto"
+         class="py-5 bg-light">
+
+    <div class="container">
+
+        <div class="text-center mb-4">
+
+            <h2 class="fw-bold text-primary">
+
+                Contacto
+
+            </h2>
+
+            <p>
+
+                Solicita información sobre nuestros servicios.
+
+            </p>
+
+        </div>
+
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <div class="card shadow-sm">
+
+                    <div class="card-body p-4">
+
+                        <form id="formServicio">
+
+                            <div class="mb-3">
+
+                                <label
+                                    for="nombre"
+                                    class="form-label">
+
+                                    Nombre
+
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="nombre"
+                                    class="form-control"
+                                    required>
+
+                            </div>
+
+
+                            <div class="mb-3">
+
+                                <label
+                                    for="correo"
+                                    class="form-label">
+
+                                    Correo electrónico
+
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="correo"
+                                    class="form-control"
+                                    required>
+
+                            </div>
+
+
+                            <div class="mb-3">
+
+                                <label
+                                    for="servicio"
+                                    class="form-label">
+
+                                    Servicio de interés
+
+                                </label>
+
+                                <select
+                                    id="servicio"
+                                    class="form-select"
+                                    required>
+
+                                    <option value="">
+                                        Seleccione un servicio
+                                    </option>
+
+                                    <option value="Desarrollo Web">
+                                        Desarrollo Web
+                                    </option>
+
+                                    <option value="Soporte Técnico">
+                                        Soporte Técnico
+                                    </option>
+
+                                    <option value="Capacitación">
+                                        Capacitación
+                                    </option>
+
+                                    <option value="Consultoría">
+                                        Consultoría
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+                            <div class="mb-3">
+
+                                <label
+                                    for="detalleSolicitud"
+                                    class="form-label">
+
+                                    Detalle de la solicitud
+
+                                </label>
+
+                                <textarea
+                                    id="detalleSolicitud"
+                                    class="form-control"
+                                    rows="4"
+                                    required>
+                                </textarea>
+
+                            </div>
+
+
+                            <button
+                                type="submit"
+                                class="btn btn-primary">
+
+                                Enviar solicitud
+
+                            </button>
+
+                        </form>
+
+
+                        <div
+                            id="mensajeContacto"
+                            class="mt-3">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ====================================================== -->
+<!-- FOOTER -->
+<!-- ====================================================== -->
+
+<footer class="bg-dark text-white text-center py-4">
+
+    <div class="container">
+
+        <p class="mb-1">
+
+            <strong>TecnoSoluciones</strong>
+
+        </p>
+
+        <p class="mb-1">
+
+            Proyecto Integrador - Desarrollo de Aplicaciones Web
+
+        </p>
+
+        <p class="mb-1">
+
+            Avances 13/16 y 14/16 -
+            CRUD de productos y autenticación
+
+        </p>
+
+        <p class="mb-0">
+
+            &copy; 2026 TecnoSoluciones
+
+        </p>
+
+    </div>
+
+</footer>
+
+
+<!-- ====================================================== -->
+<!-- BOOTSTRAP -->
+<!-- ====================================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<!-- ====================================================== -->
+<!-- JAVASCRIPT DEL PROYECTO -->
+<!-- ====================================================== -->
+
+<script src="static/js/script.js"></script>
+
+
+</body>
+
+</html>

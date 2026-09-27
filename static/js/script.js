@@ -1,44 +1,39 @@
-```javascript
 // ==========================================================
 // TECNOSOLUCIONES
-// SEMANA 12 - PERSISTENCIA DE DATOS
+// SEMANAS 13 Y 14
+// CRUD DE PRODUCTOS Y AUTENTICACIÓN
 // ==========================================================
 
 
 // ==========================================================
-// SERVICIOS DE TECNOSOLUCIONES
+// SERVICIOS
 // ==========================================================
 
 const servicios = [
-
     {
         nombre: "Desarrollo Web",
         descripcion:
             "Diseñamos sitios web modernos, funcionales y adaptables a diferentes dispositivos.",
         color: "primary"
     },
-
     {
         nombre: "Soporte Técnico",
         descripcion:
             "Ofrecemos mantenimiento preventivo y correctivo para equipos informáticos.",
         color: "success"
     },
-
     {
         nombre: "Capacitación",
         descripcion:
             "Realizamos cursos y asesorías sobre herramientas digitales y tecnología.",
         color: "warning"
     },
-
     {
         nombre: "Consultoría",
         descripcion:
             "Brindamos asesoramiento tecnológico para empresas y emprendedores.",
         color: "info"
     }
-
 ];
 
 
@@ -57,15 +52,17 @@ function mostrarServicios() {
 
     contenedorServicios.innerHTML = "";
 
-    servicios.forEach(function(servicio) {
+    servicios.forEach(function (servicio) {
 
         contenedorServicios.innerHTML += `
-
             <div class="col-md-6 col-lg-3">
-
-                <div class="card shadow h-100">
-
+                <div class="card h-100 shadow-sm border-0">
                     <div class="card-body text-center">
+                        <div class="mb-3">
+                            <span class="badge bg-${servicio.color}">
+                                Servicio
+                            </span>
+                        </div>
 
                         <h5 class="card-title">
                             ${servicio.nombre}
@@ -76,31 +73,21 @@ function mostrarServicios() {
                         </p>
 
                         <button
-                            class="btn btn-${servicio.color}"
-                            onclick="mostrarDetalle(
-                                '${servicio.nombre}',
-                                '${servicio.descripcion}'
-                            )">
-
+                            type="button"
+                            class="btn btn-outline-${servicio.color}"
+                            onclick="mostrarDetalle('${servicio.nombre}', '${servicio.descripcion}')">
                             Ver detalles
-
                         </button>
-
                     </div>
-
                 </div>
-
             </div>
-
         `;
-
     });
-
 }
 
 
 // ==========================================================
-// MOSTRAR DETALLE DEL SERVICIO
+// DETALLE DEL SERVICIO
 // ==========================================================
 
 function mostrarDetalle(nombre, descripcion) {
@@ -110,23 +97,36 @@ function mostrarDetalle(nombre, descripcion) {
         "\n\n" +
         descripcion
     );
-
 }
 
 
 // ==========================================================
-// SEMANA 12
-// PERSISTENCIA DE PRODUCTOS
+// SEMANA 13
+// CRUD DE PRODUCTOS
 // ==========================================================
 
+let productos = JSON.parse(
+    localStorage.getItem("tecnoSolucionesProductos")
+) || [];
 
-// Recuperar productos guardados
-let productos =
-    JSON.parse(
-        localStorage.getItem(
-            "tecnoSolucionesProductos"
-        )
-    ) || [];
+
+// Producto inicial de ejemplo
+
+if (productos.length === 0) {
+
+    productos.push({
+        id: 1,
+        nombre: "Taladro Eléctrico",
+        categoria: "Herramientas",
+        precio: 85.50,
+        stock: 15
+    });
+
+    localStorage.setItem(
+        "tecnoSolucionesProductos",
+        JSON.stringify(productos)
+    );
+}
 
 
 // ==========================================================
@@ -148,6 +148,18 @@ const mensajeProducto =
 const sinProductos =
     document.getElementById("sinProductos");
 
+const idProducto =
+    document.getElementById("idProducto");
+
+const tituloFormularioProducto =
+    document.getElementById("tituloFormularioProducto");
+
+const botonGuardarProducto =
+    document.getElementById("botonGuardarProducto");
+
+const botonCancelarEdicion =
+    document.getElementById("botonCancelarEdicion");
+
 
 // ==========================================================
 // MOSTRAR PRODUCTOS
@@ -162,131 +174,105 @@ function mostrarProductos() {
     tablaProductos.innerHTML = "";
 
     if (contadorProductos) {
-
-        contadorProductos.textContent =
-            productos.length;
-
+        contadorProductos.textContent = productos.length;
     }
 
-
-    // Si no existen productos
     if (productos.length === 0) {
 
         if (sinProductos) {
-
-            sinProductos.style.display =
-                "block";
-
+            sinProductos.style.display = "block";
         }
 
         return;
     }
 
-
     if (sinProductos) {
-
-        sinProductos.style.display =
-            "none";
-
+        sinProductos.style.display = "none";
     }
 
-
-    // Recorrer productos
-    productos.forEach(function(producto) {
+    productos.forEach(function (producto) {
 
         const estado =
-            producto.stock > 0
+            Number(producto.stock) > 0
                 ? "Disponible"
                 : "Agotado";
 
-
         const claseEstado =
-            producto.stock > 0
+            Number(producto.stock) > 0
                 ? "success"
                 : "danger";
 
-
         tablaProductos.innerHTML += `
-
             <tr>
+                <td>${producto.id}</td>
+                <td>${producto.nombre}</td>
+                <td>${producto.categoria}</td>
+                <td>$${Number(producto.precio).toFixed(2)}</td>
+                <td>${producto.stock}</td>
 
                 <td>
-                    ${producto.id}
-                </td>
-
-                <td>
-                    ${producto.nombre}
-                </td>
-
-                <td>
-                    ${producto.categoria}
-                </td>
-
-                <td>
-                    $${Number(producto.precio).toFixed(2)}
-                </td>
-
-                <td>
-                    ${producto.stock}
-                </td>
-
-                <td>
-
                     <span class="badge bg-${claseEstado}">
                         ${estado}
                     </span>
-
                 </td>
 
                 <td>
+                    <button
+                        type="button"
+                        class="btn btn-warning btn-sm"
+                        onclick="editarProducto(${producto.id})">
+                        Editar
+                    </button>
 
                     <button
                         type="button"
                         class="btn btn-danger btn-sm"
                         onclick="eliminarProducto(${producto.id})">
-
                         Eliminar
-
                     </button>
-
                 </td>
-
             </tr>
-
         `;
-
     });
-
 }
 
 
 // ==========================================================
-// REGISTRAR PRODUCTO
+// GUARDAR PRODUCTOS
+// ==========================================================
+
+function guardarProductos() {
+
+    localStorage.setItem(
+        "tecnoSolucionesProductos",
+        JSON.stringify(productos)
+    );
+}
+
+
+// ==========================================================
+// REGISTRAR / ACTUALIZAR PRODUCTO
 // ==========================================================
 
 if (formularioProducto) {
 
     formularioProducto.addEventListener(
         "submit",
-        function(evento) {
+        function (evento) {
 
             evento.preventDefault();
 
-
-            // Obtener datos
             const nombre =
                 document
                     .getElementById("nombreProducto")
                     .value
                     .trim();
 
-
             const categoria =
                 document
                     .getElementById("categoriaProducto")
                     .value
                     .trim();
-
 
             const precio =
                 parseFloat(
@@ -295,7 +281,6 @@ if (formularioProducto) {
                         .value
                 );
 
-
             const stock =
                 parseInt(
                     document
@@ -303,10 +288,6 @@ if (formularioProducto) {
                         .value
                 );
 
-
-            // ==================================================
-            // VALIDACIONES
-            // ==================================================
 
             if (
                 nombre === "" ||
@@ -347,88 +328,220 @@ if (formularioProducto) {
 
 
             // ==================================================
-            // GENERAR ID
+            // EDITAR PRODUCTO
+            // ==================================================
+
+            if (
+                idProducto &&
+                idProducto.value !== ""
+            ) {
+
+                const id =
+                    Number(idProducto.value);
+
+                const indice =
+                    productos.findIndex(
+                        function (producto) {
+                            return producto.id === id;
+                        }
+                    );
+
+
+                if (indice !== -1) {
+
+                    productos[indice] = {
+
+                        id: id,
+                        nombre: nombre,
+                        categoria: categoria,
+                        precio: precio,
+                        stock: stock
+
+                    };
+
+                    guardarProductos();
+
+                    mostrarProductos();
+
+                    cancelarEdicion();
+
+                    mostrarMensajeProducto(
+                        "Producto actualizado correctamente.",
+                        "success"
+                    );
+                }
+
+                return;
+            }
+
+
+            // ==================================================
+            // NUEVO PRODUCTO
             // ==================================================
 
             let nuevoId = 1;
-
 
             if (productos.length > 0) {
 
                 nuevoId =
                     Math.max(
                         ...productos.map(
-                            function(producto) {
-                                return producto.id;
+                            function (producto) {
+                                return Number(producto.id);
                             }
                         )
                     ) + 1;
-
             }
 
-
-            // ==================================================
-            // CREAR PRODUCTO
-            // ==================================================
 
             const nuevoProducto = {
 
                 id: nuevoId,
-
                 nombre: nombre,
-
                 categoria: categoria,
-
                 precio: precio,
-
                 stock: stock
 
             };
 
 
-            // ==================================================
-            // AGREGAR PRODUCTO
-            // ==================================================
-
             productos.push(nuevoProducto);
 
-
-            // ==================================================
-            // GUARDAR EN LOCALSTORAGE
-            // ==================================================
-
-            localStorage.setItem(
-
-                "tecnoSolucionesProductos",
-
-                JSON.stringify(productos)
-
-            );
-
-
-            // ==================================================
-            // ACTUALIZAR TABLA
-            // ==================================================
+            guardarProductos();
 
             mostrarProductos();
 
-
-            // Limpiar formulario
             formularioProducto.reset();
 
-
-            // Mostrar mensaje
             mostrarMensajeProducto(
-
                 "Producto registrado correctamente.",
-
                 "success"
-
             );
-
         }
     );
+}
 
+
+// ==========================================================
+// EDITAR PRODUCTO
+// ==========================================================
+
+function editarProducto(id) {
+
+    const producto =
+        productos.find(
+            function (item) {
+                return item.id === id;
+            }
+        );
+
+    if (!producto) {
+        return;
+    }
+
+
+    document.getElementById(
+        "nombreProducto"
+    ).value = producto.nombre;
+
+
+    document.getElementById(
+        "categoriaProducto"
+    ).value = producto.categoria;
+
+
+    document.getElementById(
+        "precioProducto"
+    ).value = producto.precio;
+
+
+    document.getElementById(
+        "stockProducto"
+    ).value = producto.stock;
+
+
+    if (idProducto) {
+        idProducto.value = producto.id;
+    }
+
+
+    if (tituloFormularioProducto) {
+
+        tituloFormularioProducto.textContent =
+            "Editar Producto";
+    }
+
+
+    if (botonGuardarProducto) {
+
+        botonGuardarProducto.textContent =
+            "Actualizar Producto";
+
+        botonGuardarProducto.classList.remove(
+            "btn-success"
+        );
+
+        botonGuardarProducto.classList.add(
+            "btn-warning"
+        );
+    }
+
+
+    if (botonCancelarEdicion) {
+
+        botonCancelarEdicion.classList.remove(
+            "d-none"
+        );
+    }
+}
+
+
+// ==========================================================
+// CANCELAR EDICIÓN
+// ==========================================================
+
+function cancelarEdicion() {
+
+    if (!formularioProducto) {
+        return;
+    }
+
+    formularioProducto.reset();
+
+
+    if (idProducto) {
+        idProducto.value = "";
+    }
+
+
+    if (tituloFormularioProducto) {
+
+        tituloFormularioProducto.textContent =
+            "Registrar Producto";
+    }
+
+
+    if (botonGuardarProducto) {
+
+        botonGuardarProducto.textContent =
+            "Guardar Producto";
+
+        botonGuardarProducto.classList.remove(
+            "btn-warning"
+        );
+
+        botonGuardarProducto.classList.add(
+            "btn-success"
+        );
+    }
+
+
+    if (botonCancelarEdicion) {
+
+        botonCancelarEdicion.classList.add(
+            "d-none"
+        );
+    }
 }
 
 
@@ -443,50 +556,32 @@ function eliminarProducto(id) {
             "¿Está seguro de eliminar este producto?"
         );
 
-
     if (!confirmar) {
         return;
     }
 
 
-    // Eliminar producto
     productos =
         productos.filter(
-            function(producto) {
-
+            function (producto) {
                 return producto.id !== id;
-
             }
         );
 
 
-    // Actualizar localStorage
-    localStorage.setItem(
+    guardarProductos();
 
-        "tecnoSolucionesProductos",
-
-        JSON.stringify(productos)
-
-    );
-
-
-    // Actualizar tabla
     mostrarProductos();
 
-
     mostrarMensajeProducto(
-
         "Producto eliminado correctamente.",
-
         "warning"
-
     );
-
 }
 
 
 // ==========================================================
-// MOSTRAR MENSAJES DE PRODUCTOS
+// MENSAJES DE PRODUCTOS
 // ==========================================================
 
 function mostrarMensajeProducto(
@@ -500,27 +595,335 @@ function mostrarMensajeProducto(
 
 
     mensajeProducto.innerHTML = `
-
-        <div
-            class="alert alert-${tipo}"
-            role="alert">
-
+        <div class="alert alert-${tipo}">
             ${texto}
-
         </div>
-
     `;
 
 
     setTimeout(
-        function() {
+        function () {
 
             mensajeProducto.innerHTML = "";
 
         },
         3000
     );
+}
 
+
+// ==========================================================
+// SEMANA 14
+// AUTENTICACIÓN DEMOSTRATIVA
+// ==========================================================
+
+let usuarios = JSON.parse(
+    localStorage.getItem("tecnoSolucionesUsuarios")
+) || [];
+
+let usuarioActual =
+    localStorage.getItem(
+        "tecnoSolucionesUsuarioActual"
+    ) || "";
+
+
+// ==========================================================
+// ELEMENTOS DE AUTENTICACIÓN
+// ==========================================================
+
+const formularioRegistro =
+    document.getElementById("formRegistro");
+
+const formularioLogin =
+    document.getElementById("formLogin");
+
+const mensajeRegistro =
+    document.getElementById("mensajeRegistro");
+
+const mensajeLogin =
+    document.getElementById("mensajeLogin");
+
+const panelAutenticacion =
+    document.getElementById("panelAutenticacion");
+
+const usuarioConectado =
+    document.getElementById("usuarioConectado");
+
+const nombreUsuarioActual =
+    document.getElementById("nombreUsuarioActual");
+
+
+// ==========================================================
+// REGISTRO DE USUARIO
+// ==========================================================
+
+if (formularioRegistro) {
+
+    formularioRegistro.addEventListener(
+        "submit",
+        function (evento) {
+
+            evento.preventDefault();
+
+
+            const usuario =
+                document
+                    .getElementById("usuarioRegistro")
+                    .value
+                    .trim();
+
+
+            const password =
+                document
+                    .getElementById("passwordRegistro")
+                    .value;
+
+
+            if (usuario.length < 3) {
+
+                mostrarMensajeAuth(
+                    mensajeRegistro,
+                    "El usuario debe tener al menos 3 caracteres.",
+                    "danger"
+                );
+
+                return;
+            }
+
+
+            if (password.length < 6) {
+
+                mostrarMensajeAuth(
+                    mensajeRegistro,
+                    "La contraseña debe tener al menos 6 caracteres.",
+                    "danger"
+                );
+
+                return;
+            }
+
+
+            const existe =
+                usuarios.some(
+                    function (item) {
+
+                        return (
+                            item.usuario.toLowerCase() ===
+                            usuario.toLowerCase()
+                        );
+
+                    }
+                );
+
+
+            if (existe) {
+
+                mostrarMensajeAuth(
+                    mensajeRegistro,
+                    "El usuario ya existe.",
+                    "danger"
+                );
+
+                return;
+            }
+
+
+            usuarios.push({
+
+                usuario: usuario,
+                password: password
+
+            });
+
+
+            localStorage.setItem(
+                "tecnoSolucionesUsuarios",
+                JSON.stringify(usuarios)
+            );
+
+
+            formularioRegistro.reset();
+
+
+            mostrarMensajeAuth(
+                mensajeRegistro,
+                "Usuario registrado correctamente. Ahora puede iniciar sesión.",
+                "success"
+            );
+        }
+    );
+}
+
+
+// ==========================================================
+// INICIO DE SESIÓN
+// ==========================================================
+
+if (formularioLogin) {
+
+    formularioLogin.addEventListener(
+        "submit",
+        function (evento) {
+
+            evento.preventDefault();
+
+
+            const usuario =
+                document
+                    .getElementById("usuarioLogin")
+                    .value
+                    .trim();
+
+
+            const password =
+                document
+                    .getElementById("passwordLogin")
+                    .value;
+
+
+            const encontrado =
+                usuarios.find(
+                    function (item) {
+
+                        return (
+                            item.usuario.toLowerCase() ===
+                            usuario.toLowerCase() &&
+                            item.password === password
+                        );
+
+                    }
+                );
+
+
+            if (!encontrado) {
+
+                mostrarMensajeAuth(
+                    mensajeLogin,
+                    "Usuario o contraseña incorrectos.",
+                    "danger"
+                );
+
+                return;
+            }
+
+
+            usuarioActual =
+                encontrado.usuario;
+
+
+            localStorage.setItem(
+                "tecnoSolucionesUsuarioActual",
+                usuarioActual
+            );
+
+
+            formularioLogin.reset();
+
+            actualizarSesion();
+
+
+            mostrarMensajeAuth(
+                mensajeLogin,
+                "Inicio de sesión correcto.",
+                "success"
+            );
+        }
+    );
+}
+
+
+// ==========================================================
+// MOSTRAR SESIÓN
+// ==========================================================
+
+function actualizarSesion() {
+
+    if (
+        !usuarioConectado ||
+        !panelAutenticacion
+    ) {
+
+        return;
+    }
+
+
+    if (usuarioActual !== "") {
+
+        panelAutenticacion.classList.add(
+            "d-none"
+        );
+
+        usuarioConectado.classList.remove(
+            "d-none"
+        );
+
+
+        if (nombreUsuarioActual) {
+
+            nombreUsuarioActual.textContent =
+                usuarioActual;
+        }
+
+    } else {
+
+        panelAutenticacion.classList.remove(
+            "d-none"
+        );
+
+        usuarioConectado.classList.add(
+            "d-none"
+        );
+    }
+}
+
+
+// ==========================================================
+// CERRAR SESIÓN
+// ==========================================================
+
+function cerrarSesion() {
+
+    usuarioActual = "";
+
+    localStorage.removeItem(
+        "tecnoSolucionesUsuarioActual"
+    );
+
+
+    actualizarSesion();
+
+
+    if (mensajeLogin) {
+
+        mostrarMensajeAuth(
+            mensajeLogin,
+            "Sesión cerrada correctamente.",
+            "success"
+        );
+    }
+}
+
+
+// ==========================================================
+// MENSAJES DE AUTENTICACIÓN
+// ==========================================================
+
+function mostrarMensajeAuth(
+    elemento,
+    texto,
+    tipo
+) {
+
+    if (!elemento) {
+        return;
+    }
+
+
+    elemento.innerHTML = `
+        <div class="alert alert-${tipo}">
+            ${texto}
+        </div>
+    `;
 }
 
 
@@ -539,7 +942,7 @@ if (formularioServicio) {
 
     formularioServicio.addEventListener(
         "submit",
-        function(evento) {
+        function (evento) {
 
             evento.preventDefault();
 
@@ -581,16 +984,10 @@ if (formularioServicio) {
                 if (mensajeContacto) {
 
                     mensajeContacto.innerHTML = `
-
                         <div class="alert alert-danger">
-
-                            Complete todos los campos
-                            del formulario.
-
+                            Complete todos los campos del formulario.
                         </div>
-
                     `;
-
                 }
 
                 return;
@@ -600,29 +997,17 @@ if (formularioServicio) {
             if (mensajeContacto) {
 
                 mensajeContacto.innerHTML = `
-
                     <div class="alert alert-success">
-
-                        <strong>Solicitud enviada correctamente.</strong>
-
-                        <br>
-
-                        Gracias ${nombre}.
-                        Hemos recibido su solicitud
-                        de ${servicio}.
-
+                        <strong>Solicitud enviada correctamente.</strong><br>
+                        Gracias ${nombre}. Hemos recibido su solicitud de ${servicio}.
                     </div>
-
                 `;
-
             }
 
 
             formularioServicio.reset();
-
         }
     );
-
 }
 
 
@@ -633,6 +1018,5 @@ if (formularioServicio) {
 mostrarServicios();
 
 mostrarProductos();
-```
 
-
+actualizarSesion();
