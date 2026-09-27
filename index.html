@@ -1,220 +1,65 @@
-```html
-<!DOCTYPE html>
-<html lang="es">
+// ==========================================================
+// TECNOSOLUCIONES
+// SEMANAS 13 Y 14
+// CRUD DE PRODUCTOS Y AUTENTICACIÓN
+// ==========================================================
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>TecnoSoluciones</title>
+// ==========================================================
+// SERVICIOS
+// ==========================================================
 
-    <meta name="description"
-        content="TecnoSoluciones ofrece servicios de desarrollo web, soporte técnico, capacitación y consultoría tecnológica.">
+const servicios = [
 
-    <!-- Bootstrap -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+    {
+        nombre: "Desarrollo Web",
+        descripcion:
+            "Diseñamos sitios web modernos, funcionales y adaptables a diferentes dispositivos.",
+        color: "primary"
+    },
 
-    <!-- CSS del proyecto -->
-    <link rel="stylesheet" href="static/css/estilos.css">
-</head>
+    {
+        nombre: "Soporte Técnico",
+        descripcion:
+            "Ofrecemos mantenimiento preventivo y correctivo para equipos informáticos.",
+        color: "success"
+    },
 
-<body>
+    {
+        nombre: "Capacitación",
+        descripcion:
+            "Realizamos cursos y asesorías sobre herramientas digitales y tecnología.",
+        color: "warning"
+    },
 
-    <!-- =====================================================
-         BARRA DE NAVEGACIÓN
-    ====================================================== -->
+    {
+        nombre: "Consultoría",
+        descripcion:
+            "Brindamos asesoramiento tecnológico para empresas y emprendedores.",
+        color: "info"
+    }
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+];
 
-        <div class="container">
 
-            <a class="navbar-brand fw-bold" href="#inicio">
-                TecnoSoluciones
-            </a>
+// ==========================================================
+// MOSTRAR SERVICIOS
+// ==========================================================
 
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#menuPrincipal"
-                aria-controls="menuPrincipal"
-                aria-expanded="false"
-                aria-label="Mostrar navegación">
+function mostrarServicios() {
 
-                <span class="navbar-toggler-icon"></span>
+    const contenedorServicios =
+        document.getElementById("contenedorServicios");
 
-            </button>
+    if (!contenedorServicios) {
+        return;
+    }
 
-            <div
-                class="collapse navbar-collapse"
-                id="menuPrincipal">
+    contenedorServicios.innerHTML = "";
 
-                <ul class="navbar-nav ms-auto">
+    servicios.forEach(function(servicio) {
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="#inicio">
-                            Inicio
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#quienes-somos">
-                            Quiénes Somos
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#servicios">
-                            Servicios
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#productos">
-                            Productos
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#registro">
-                            Contacto
-                        </a>
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </div>
-
-    </nav>
-
-
-    <!-- =====================================================
-         INICIO
-    ====================================================== -->
-
-    <header
-        id="inicio"
-        class="hero-section text-white text-center">
-
-        <div class="container py-5">
-
-            <img
-                src="static/img/logo.svg"
-                alt="Logo de TecnoSoluciones"
-                class="img-fluid mb-4"
-                style="max-width: 420px;">
-
-            <h1 class="display-4 fw-bold">
-                TecnoSoluciones
-            </h1>
-
-            <p class="lead">
-                Soluciones tecnológicas para estudiantes,
-                emprendedores y empresas.
-            </p>
-
-            <a
-                href="#productos"
-                class="btn btn-warning btn-lg mt-3">
-
-                Gestionar Productos
-
-            </a>
-
-        </div>
-
-    </header>
-
-
-    <!-- =====================================================
-         MENSAJE DE BIENVENIDA
-    ====================================================== -->
-
-    <div class="container mt-4">
-
-        <div class="alert alert-info text-center">
-
-            <strong>
-                Bienvenido a TecnoSoluciones.
-            </strong>
-
-            Ofrecemos servicios tecnológicos adaptados
-            a las necesidades de nuestros clientes.
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         QUIÉNES SOMOS
-    ====================================================== -->
-
-    <section
-        id="quienes-somos"
-        class="container py-5">
-
-        <div class="row align-items-center">
-
-            <div class="col-lg-6">
-
-                <h2>
-                    Quiénes Somos
-                </h2>
-
-                <p>
-                    TecnoSoluciones es un proyecto orientado
-                    a brindar soluciones tecnológicas para
-                    estudiantes, emprendedores y empresas.
-                </p>
-
-                <p>
-                    Nuestro trabajo se enfoca en brindar
-                    servicios de desarrollo web, soporte técnico,
-                    capacitación y consultoría.
-                </p>
-
-                <p>
-                    Buscamos ofrecer soluciones prácticas,
-                    modernas y adaptadas a las necesidades
-                    de nuestros clientes.
-                </p>
-
-            </div>
-
-            <div class="col-lg-6 text-center">
-
-                <img
-                    src="static/img/tecnologia.svg"
-                    class="img-fluid rounded shadow"
-                    alt="Soluciones tecnológicas">
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         SERVICIOS
-    ====================================================== -->
-
-    <section
-        id="servicios"
-        class="container py-5">
-
-        <h2 class="text-center mb-5">
-            Nuestros Servicios
-        </h2>
-
-        <div class="row g-4">
-
-            <!-- Desarrollo Web -->
+        contenedorServicios.innerHTML += `
 
             <div class="col-md-6 col-lg-3">
 
@@ -222,19 +67,24 @@
 
                     <div class="card-body text-center">
 
-                        <h4 class="card-title">
-                            Desarrollo Web
-                        </h4>
+                        <h5 class="card-title">
+                            ${servicio.nombre}
+                        </h5>
 
                         <p class="card-text">
-                            Diseñamos sitios web modernos,
-                            funcionales y adaptables a
-                            diferentes dispositivos.
+                            ${servicio.descripcion}
                         </p>
 
-                        <span class="badge text-bg-primary">
-                            Desarrollo Web
-                        </span>
+                        <button
+                            class="btn btn-${servicio.color}"
+                            onclick="mostrarDetalle(
+                                '${servicio.nombre}',
+                                '${servicio.descripcion}'
+                            )">
+
+                            Ver detalles
+
+                        </button>
 
                     </div>
 
@@ -242,592 +92,1270 @@
 
             </div>
 
+        `;
 
-            <!-- Soporte Técnico -->
+    });
 
-            <div class="col-md-6 col-lg-3">
-
-                <div class="card shadow h-100">
-
-                    <div class="card-body text-center">
-
-                        <h4 class="card-title">
-                            Soporte Técnico
-                        </h4>
-
-                        <p class="card-text">
-                            Ofrecemos mantenimiento preventivo
-                            y correctivo para equipos
-                            informáticos.
-                        </p>
-
-                        <span class="badge text-bg-success">
-                            Soporte Técnico
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
+}
 
 
-            <!-- Capacitación -->
+// ==========================================================
+// DETALLE DEL SERVICIO
+// ==========================================================
 
-            <div class="col-md-6 col-lg-3">
+function mostrarDetalle(nombre, descripcion) {
 
-                <div class="card shadow h-100">
+    alert(
+        nombre +
+        "\n\n" +
+        descripcion
+    );
 
-                    <div class="card-body text-center">
-
-                        <h4 class="card-title">
-                            Capacitación
-                        </h4>
-
-                        <p class="card-text">
-                            Realizamos cursos y asesorías
-                            sobre herramientas digitales
-                            y tecnología.
-                        </p>
-
-                        <span class="badge text-bg-warning">
-                            Capacitación
-                        </span>
-
-                    </div>
-
-                </div>
-
-            </div>
+}
 
 
-            <!-- Consultoría -->
+// ==========================================================
+// SEMANA 13
+// CRUD DE PRODUCTOS
+// ==========================================================
 
-            <div class="col-md-6 col-lg-3">
+let productos =
+    JSON.parse(
+        localStorage.getItem(
+            "tecnoSolucionesProductos"
+        )
+    ) || [];
 
-                <div class="card shadow h-100">
 
-                    <div class="card-body text-center">
+// Si no existen productos, colocar el producto utilizado
+// durante la Semana 13 como ejemplo inicial.
 
-                        <h4 class="card-title">
-                            Consultoría
-                        </h4>
+if (productos.length === 0) {
 
-                        <p class="card-text">
-                            Brindamos asesoramiento tecnológico
-                            para empresas y emprendedores.
-                        </p>
+    productos.push({
 
-                        <span class="badge text-bg-info">
-                            Consultoría
-                        </span>
+        id: 1,
 
-                    </div>
+        nombre: "Taladro Eléctrico",
 
-                </div>
+        categoria: "Herramientas",
 
-            </div>
+        precio: 85.50,
+
+        stock: 15
+
+    });
+
+    localStorage.setItem(
+
+        "tecnoSolucionesProductos",
+
+        JSON.stringify(productos)
+
+    );
+
+}
+
+
+// ==========================================================
+// ELEMENTOS DEL HTML
+// ==========================================================
+
+const formularioProducto =
+    document.getElementById("formProducto");
+
+const tablaProductos =
+    document.getElementById("tablaProductos");
+
+const contadorProductos =
+    document.getElementById("contadorProductos");
+
+const mensajeProducto =
+    document.getElementById("mensajeProducto");
+
+const sinProductos =
+    document.getElementById("sinProductos");
+
+const idProducto =
+    document.getElementById("idProducto");
+
+const tituloFormularioProducto =
+    document.getElementById("tituloFormularioProducto");
+
+const botonGuardarProducto =
+    document.getElementById("botonGuardarProducto");
+
+const botonCancelarEdicion =
+    document.getElementById("botonCancelarEdicion");
+
+
+// ==========================================================
+// MOSTRAR PRODUCTOS
+// ==========================================================
+
+function mostrarProductos() {
+
+    if (!tablaProductos) {
+        return;
+    }
+
+    tablaProductos.innerHTML = "";
+
+    if (contadorProductos) {
+
+        contadorProductos.textContent =
+            productos.length;
+
+    }
+
+
+    if (productos.length === 0) {
+
+        if (sinProductos) {
+
+            sinProductos.style.display =
+                "block";
+
+        }
+
+        return;
+
+    }
+
+
+    if (sinProductos) {
+
+        sinProductos.style.display =
+            "none";
+
+    }
+
+
+    productos.forEach(function(producto) {
+
+        const estado =
+            Number(producto.stock) > 0
+                ? "Disponible"
+                : "Agotado";
+
+
+        const claseEstado =
+            Number(producto.stock) > 0
+                ? "success"
+                : "danger";
+
+
+        tablaProductos.innerHTML += `
+
+            <tr>
+
+                <td>
+                    ${producto.id}
+                </td>
+
+                <td>
+                    ${producto.nombre}
+                </td>
+
+                <td>
+                    ${producto.categoria}
+                </td>
+
+                <td>
+                    $${Number(producto.precio).toFixed(2)}
+                </td>
+
+                <td>
+                    ${producto.stock}
+                </td>
+
+                <td>
+
+                    <span class="badge bg-${claseEstado}">
+                        ${estado}
+                    </span>
+
+                </td>
+
+                <td>
+
+                    <button
+                        type="button"
+                        class="btn btn-warning btn-sm"
+                        onclick="editarProducto(${producto.id})">
+
+                        Editar
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="btn btn-danger btn-sm"
+                        onclick="eliminarProducto(${producto.id})">
+
+                        Eliminar
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
+
+
+// ==========================================================
+// GUARDAR PRODUCTOS
+// ==========================================================
+
+function guardarProductos() {
+
+    localStorage.setItem(
+
+        "tecnoSolucionesProductos",
+
+        JSON.stringify(productos)
+
+    );
+
+}
+
+
+// ==========================================================
+// REGISTRAR / ACTUALIZAR PRODUCTO
+// ==========================================================
+
+if (formularioProducto) {
+
+    formularioProducto.addEventListener(
+
+        "submit",
+
+        function(evento) {
+
+            evento.preventDefault();
+
+
+            const nombre =
+                document
+                    .getElementById("nombreProducto")
+                    .value
+                    .trim();
+
+
+            const categoria =
+                document
+                    .getElementById("categoriaProducto")
+                    .value
+                    .trim();
+
+
+            const precio =
+                parseFloat(
+                    document
+                        .getElementById("precioProducto")
+                        .value
+                );
+
+
+            const stock =
+                parseInt(
+                    document
+                        .getElementById("stockProducto")
+                        .value
+                );
+
+
+            if (
+
+                nombre === "" ||
+
+                categoria === "" ||
+
+                isNaN(precio) ||
+
+                isNaN(stock)
+
+            ) {
+
+                mostrarMensajeProducto(
+
+                    "Complete todos los campos.",
+
+                    "danger"
+
+                );
+
+                return;
+
+            }
+
+
+            if (precio < 0) {
+
+                mostrarMensajeProducto(
+
+                    "El precio no puede ser negativo.",
+
+                    "danger"
+
+                );
+
+                return;
+
+            }
+
+
+            if (stock < 0) {
+
+                mostrarMensajeProducto(
+
+                    "El stock no puede ser negativo.",
+
+                    "danger"
+
+                );
+
+                return;
+
+            }
+
+
+            // ==================================================
+            // EDITAR PRODUCTO
+            // ==================================================
+
+            if (
+
+                idProducto &&
+
+                idProducto.value !== ""
+
+            ) {
+
+                const id =
+                    Number(idProducto.value);
+
+
+                const indice =
+                    productos.findIndex(
+
+                        function(producto) {
+
+                            return producto.id === id;
+
+                        }
+
+                    );
+
+
+                if (indice !== -1) {
+
+                    productos[indice] = {
+
+                        id: id,
+
+                        nombre: nombre,
+
+                        categoria: categoria,
+
+                        precio: precio,
+
+                        stock: stock
+
+                    };
+
+
+                    guardarProductos();
+
+                    mostrarProductos();
+
+                    cancelarEdicion();
+
+
+                    mostrarMensajeProducto(
+
+                        "Producto actualizado correctamente.",
+
+                        "success"
+
+                    );
+
+                }
+
+
+                return;
+
+            }
+
+
+            // ==================================================
+            // NUEVO PRODUCTO
+            // ==================================================
+
+            let nuevoId = 1;
+
+
+            if (productos.length > 0) {
+
+                nuevoId =
+
+                    Math.max(
+
+                        ...productos.map(
+
+                            function(producto) {
+
+                                return Number(producto.id);
+
+                            }
+
+                        )
+
+                    ) + 1;
+
+            }
+
+
+            const nuevoProducto = {
+
+                id: nuevoId,
+
+                nombre: nombre,
+
+                categoria: categoria,
+
+                precio: precio,
+
+                stock: stock
+
+            };
+
+
+            productos.push(nuevoProducto);
+
+
+            guardarProductos();
+
+            mostrarProductos();
+
+
+            formularioProducto.reset();
+
+
+            mostrarMensajeProducto(
+
+                "Producto registrado correctamente.",
+
+                "success"
+
+            );
+
+        }
+
+    );
+
+}
+
+
+// ==========================================================
+// EDITAR PRODUCTO
+// ==========================================================
+
+function editarProducto(id) {
+
+    const producto =
+
+        productos.find(
+
+            function(item) {
+
+                return item.id === id;
+
+            }
+
+        );
+
+
+    if (!producto) {
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "nombreProducto"
+    ).value = producto.nombre;
+
+
+    document.getElementById(
+        "categoriaProducto"
+    ).value = producto.categoria;
+
+
+    document.getElementById(
+        "precioProducto"
+    ).value = producto.precio;
+
+
+    document.getElementById(
+        "stockProducto"
+    ).value = producto.stock;
+
+
+    if (idProducto) {
+
+        idProducto.value =
+            producto.id;
+
+    }
+
+
+    if (tituloFormularioProducto) {
+
+        tituloFormularioProducto.textContent =
+            "Editar Producto";
+
+    }
+
+
+    if (botonGuardarProducto) {
+
+        botonGuardarProducto.textContent =
+            "Actualizar Producto";
+
+        botonGuardarProducto.classList.remove(
+            "btn-success"
+        );
+
+        botonGuardarProducto.classList.add(
+            "btn-warning"
+        );
+
+    }
+
+
+    if (botonCancelarEdicion) {
+
+        botonCancelarEdicion.classList.remove(
+            "d-none"
+        );
+
+    }
+
+}
+
+
+// ==========================================================
+// CANCELAR EDICIÓN
+// ==========================================================
+
+function cancelarEdicion() {
+
+    if (!formularioProducto) {
+
+        return;
+
+    }
+
+
+    formularioProducto.reset();
+
+
+    if (idProducto) {
+
+        idProducto.value = "";
+
+    }
+
+
+    if (tituloFormularioProducto) {
+
+        tituloFormularioProducto.textContent =
+            "Registrar Producto";
+
+    }
+
+
+    if (botonGuardarProducto) {
+
+        botonGuardarProducto.textContent =
+            "Guardar Producto";
+
+        botonGuardarProducto.classList.remove(
+            "btn-warning"
+        );
+
+        botonGuardarProducto.classList.add(
+            "btn-success"
+        );
+
+    }
+
+
+    if (botonCancelarEdicion) {
+
+        botonCancelarEdicion.classList.add(
+            "d-none"
+        );
+
+    }
+
+}
+
+
+// ==========================================================
+// ELIMINAR PRODUCTO
+// ==========================================================
+
+function eliminarProducto(id) {
+
+    const confirmar =
+
+        confirm(
+            "¿Está seguro de eliminar este producto?"
+        );
+
+
+    if (!confirmar) {
+
+        return;
+
+    }
+
+
+    productos =
+
+        productos.filter(
+
+            function(producto) {
+
+                return producto.id !== id;
+
+            }
+
+        );
+
+
+    guardarProductos();
+
+    mostrarProductos();
+
+
+    mostrarMensajeProducto(
+
+        "Producto eliminado correctamente.",
+
+        "warning"
+
+    );
+
+}
+
+
+// ==========================================================
+// MENSAJES DE PRODUCTOS
+// ==========================================================
+
+function mostrarMensajeProducto(
+
+    texto,
+
+    tipo
+
+) {
+
+    if (!mensajeProducto) {
+
+        return;
+
+    }
+
+
+    mensajeProducto.innerHTML = `
+
+        <div
+            class="alert alert-${tipo}"
+            role="alert">
+
+            ${texto}
 
         </div>
 
-    </section>
+    `;
 
 
-    <!-- =====================================================
-         SEMANA 12 - PERSISTENCIA DE DATOS
-    ====================================================== -->
+    setTimeout(
 
-    <section
-        id="productos"
-        class="container py-5">
+        function() {
 
-        <div class="text-center mb-5">
+            mensajeProducto.innerHTML = "";
 
-            <h2>
-                Gestión de Productos
-            </h2>
+        },
 
-            <p class="text-muted">
-                Proyecto Integrador - Semana 12
-            </p>
+        3000
 
-            <p>
-                Registro y persistencia de datos
-            </p>
+    );
+
+}
+
+
+// ==========================================================
+// SEMANA 14
+// AUTENTICACIÓN DEMOSTRATIVA PARA GITHUB PAGES
+// ==========================================================
+
+let usuarios =
+
+    JSON.parse(
+
+        localStorage.getItem(
+            "tecnoSolucionesUsuarios"
+        )
+
+    ) || [];
+
+
+let usuarioActual =
+
+    localStorage.getItem(
+        "tecnoSolucionesUsuarioActual"
+    ) || "";
+
+
+// ==========================================================
+// ELEMENTOS DE AUTENTICACIÓN
+// ==========================================================
+
+const formularioRegistro =
+    document.getElementById("formRegistro");
+
+const formularioLogin =
+    document.getElementById("formLogin");
+
+const mensajeRegistro =
+    document.getElementById("mensajeRegistro");
+
+const mensajeLogin =
+    document.getElementById("mensajeLogin");
+
+const panelAutenticacion =
+    document.getElementById("panelAutenticacion");
+
+const usuarioConectado =
+    document.getElementById("usuarioConectado");
+
+const nombreUsuarioActual =
+    document.getElementById("nombreUsuarioActual");
+
+
+// ==========================================================
+// REGISTRO DE USUARIO
+// ==========================================================
+
+if (formularioRegistro) {
+
+    formularioRegistro.addEventListener(
+
+        "submit",
+
+        function(evento) {
+
+            evento.preventDefault();
+
+
+            const usuario =
+
+                document
+                    .getElementById(
+                        "usuarioRegistro"
+                    )
+                    .value
+                    .trim();
+
+
+            const password =
+
+                document
+                    .getElementById(
+                        "passwordRegistro"
+                    )
+                    .value;
+
+
+            if (usuario.length < 3) {
+
+                mostrarMensajeAuth(
+
+                    mensajeRegistro,
+
+                    "El usuario debe tener al menos 3 caracteres.",
+
+                    "danger"
+
+                );
+
+                return;
+
+            }
+
+
+            if (password.length < 6) {
+
+                mostrarMensajeAuth(
+
+                    mensajeRegistro,
+
+                    "La contraseña debe tener al menos 6 caracteres.",
+
+                    "danger"
+
+                );
+
+                return;
+
+            }
+
+
+            const existe =
+
+                usuarios.some(
+
+                    function(item) {
+
+                        return (
+
+                            item.usuario.toLowerCase() ===
+
+                            usuario.toLowerCase()
+
+                        );
+
+                    }
+
+                );
+
+
+            if (existe) {
+
+                mostrarMensajeAuth(
+
+                    mensajeRegistro,
+
+                    "El usuario ya existe.",
+
+                    "danger"
+
+                );
+
+                return;
+
+            }
+
+
+            usuarios.push({
+
+                usuario: usuario,
+
+                password: password
+
+            });
+
+
+            localStorage.setItem(
+
+                "tecnoSolucionesUsuarios",
+
+                JSON.stringify(usuarios)
+
+            );
+
+
+            formularioRegistro.reset();
+
+
+            mostrarMensajeAuth(
+
+                mensajeRegistro,
+
+                "Usuario registrado correctamente. Ahora puede iniciar sesión.",
+
+                "success"
+
+            );
+
+        }
+
+    );
+
+}
+
+
+// ==========================================================
+// INICIO DE SESIÓN
+// ==========================================================
+
+if (formularioLogin) {
+
+    formularioLogin.addEventListener(
+
+        "submit",
+
+        function(evento) {
+
+            evento.preventDefault();
+
+
+            const usuario =
+
+                document
+                    .getElementById(
+                        "usuarioLogin"
+                    )
+                    .value
+                    .trim();
+
+
+            const password =
+
+                document
+                    .getElementById(
+                        "passwordLogin"
+                    )
+                    .value;
+
+
+            const encontrado =
+
+                usuarios.find(
+
+                    function(item) {
+
+                        return (
+
+                            item.usuario.toLowerCase() ===
+
+                            usuario.toLowerCase() &&
+
+                            item.password === password
+
+                        );
+
+                    }
+
+                );
+
+
+            if (!encontrado) {
+
+                mostrarMensajeAuth(
+
+                    mensajeLogin,
+
+                    "Usuario o contraseña incorrectos.",
+
+                    "danger"
+
+                );
+
+                return;
+
+            }
+
+
+            usuarioActual =
+                encontrado.usuario;
+
+
+            localStorage.setItem(
+
+                "tecnoSolucionesUsuarioActual",
+
+                usuarioActual
+
+            );
+
+
+            formularioLogin.reset();
+
+
+            actualizarSesion();
+
+
+            mostrarMensajeAuth(
+
+                mensajeLogin,
+
+                "Inicio de sesión correcto.",
+
+                "success"
+
+            );
+
+        }
+
+    );
+
+}
+
+
+// ==========================================================
+// MOSTRAR SESIÓN
+// ==========================================================
+
+function actualizarSesion() {
+
+    if (
+
+        !usuarioConectado ||
+
+        !panelAutenticacion
+
+    ) {
+
+        return;
+
+    }
+
+
+    if (usuarioActual !== "") {
+
+        panelAutenticacion.classList.add(
+            "d-none"
+        );
+
+
+        usuarioConectado.classList.remove(
+            "d-none"
+        );
+
+
+        if (nombreUsuarioActual) {
+
+            nombreUsuarioActual.textContent =
+                usuarioActual;
+
+        }
+
+    }
+
+    else {
+
+        panelAutenticacion.classList.remove(
+            "d-none"
+        );
+
+
+        usuarioConectado.classList.add(
+            "d-none"
+        );
+
+    }
+
+}
+
+
+// ==========================================================
+// CERRAR SESIÓN
+// ==========================================================
+
+function cerrarSesion() {
+
+    usuarioActual = "";
+
+
+    localStorage.removeItem(
+
+        "tecnoSolucionesUsuarioActual"
+
+    );
+
+
+    actualizarSesion();
+
+
+    if (mensajeLogin) {
+
+        mostrarMensajeAuth(
+
+            mensajeLogin,
+
+            "Sesión cerrada correctamente.",
+
+            "success"
+
+        );
+
+    }
+
+}
+
+
+// ==========================================================
+// MENSAJES DE AUTENTICACIÓN
+// ==========================================================
+
+function mostrarMensajeAuth(
+
+    elemento,
+
+    texto,
+
+    tipo
+
+) {
+
+    if (!elemento) {
+
+        return;
+
+    }
+
+
+    elemento.innerHTML = `
+
+        <div class="alert alert-${tipo}">
+
+            ${texto}
 
         </div>
 
+    `;
 
-        <div class="row g-4">
-
-            <!-- =================================================
-                 FORMULARIO DE PRODUCTOS
-            ================================================== -->
-
-            <div class="col-lg-5">
-
-                <div class="card shadow h-100">
-
-                    <div class="card-header bg-primary text-white">
-
-                        <h4 class="mb-0">
-                            Registrar Producto
-                        </h4>
-
-                    </div>
+}
 
 
-                    <div class="card-body">
+// ==========================================================
+// FORMULARIO DE CONTACTO
+// ==========================================================
 
-                        <form id="formProducto">
+const formularioServicio =
+    document.getElementById("formServicio");
 
-                            <!-- Nombre -->
-
-                            <div class="mb-3">
-
-                                <label
-                                    for="nombreProducto"
-                                    class="form-label">
-
-                                    Nombre del producto
-
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="nombreProducto"
-                                    class="form-control"
-                                    placeholder="Ejemplo: Laptop HP"
-                                    required>
-
-                            </div>
+const mensajeContacto =
+    document.getElementById("mensajeContacto");
 
 
-                            <!-- Categoría -->
+if (formularioServicio) {
 
-                            <div class="mb-3">
+    formularioServicio.addEventListener(
 
-                                <label
-                                    for="categoriaProducto"
-                                    class="form-label">
+        "submit",
 
-                                    Categoría
+        function(evento) {
 
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="categoriaProducto"
-                                    class="form-control"
-                                    placeholder="Ejemplo: Computación"
-                                    required>
-
-                            </div>
+            evento.preventDefault();
 
 
-                            <!-- Precio -->
+            const nombre =
 
-                            <div class="mb-3">
-
-                                <label
-                                    for="precioProducto"
-                                    class="form-label">
-
-                                    Precio
-
-                                </label>
-
-                                <input
-                                    type="number"
-                                    id="precioProducto"
-                                    class="form-control"
-                                    min="0"
-                                    step="0.01"
-                                    placeholder="0.00"
-                                    required>
-
-                            </div>
+                document
+                    .getElementById("nombre")
+                    .value
+                    .trim();
 
 
-                            <!-- Stock -->
+            const correo =
 
-                            <div class="mb-3">
-
-                                <label
-                                    for="stockProducto"
-                                    class="form-label">
-
-                                    Stock
-
-                                </label>
-
-                                <input
-                                    type="number"
-                                    id="stockProducto"
-                                    class="form-control"
-                                    min="0"
-                                    placeholder="0"
-                                    required>
-
-                            </div>
+                document
+                    .getElementById("correo")
+                    .value
+                    .trim();
 
 
-                            <div class="d-grid">
+            const servicio =
 
-                                <button
-                                    type="submit"
-                                    class="btn btn-success">
-
-                                    Guardar Producto
-
-                                </button>
-
-                            </div>
-
-                        </form>
+                document
+                    .getElementById("servicio")
+                    .value;
 
 
-                        <div
-                            id="mensajeProducto"
-                            class="mt-3">
+            const detalle =
+
+                document
+                    .getElementById(
+                        "detalleSolicitud"
+                    )
+                    .value
+                    .trim();
+
+
+            if (
+
+                nombre === "" ||
+
+                correo === "" ||
+
+                servicio === "" ||
+
+                detalle === ""
+
+            ) {
+
+                if (mensajeContacto) {
+
+                    mensajeContacto.innerHTML = `
+
+                        <div class="alert alert-danger">
+
+                            Complete todos los campos
+                            del formulario.
+
                         </div>
 
-                    </div>
+                    `;
 
-                </div>
+                }
 
-            </div>
+                return;
+
+            }
 
 
-            <!-- =================================================
-                 TABLA DE PRODUCTOS
-            ================================================== -->
+            if (mensajeContacto) {
 
-            <div class="col-lg-7">
+                mensajeContacto.innerHTML = `
 
-                <div class="card shadow h-100">
+                    <div class="alert alert-success">
 
-                    <div class="card-header bg-dark text-white">
+                        <strong>
+                            Solicitud enviada correctamente.
+                        </strong>
 
-                        <div class="d-flex justify-content-between align-items-center">
+                        <br>
 
-                            <h4 class="mb-0">
-                                Productos Registrados
-                            </h4>
-
-                            <span class="badge bg-primary">
-                                Total:
-                                <span id="contadorProductos">
-                                    0
-                                </span>
-                            </span>
-
-                        </div>
+                        Gracias ${nombre}.
+                        Hemos recibido su solicitud
+                        de ${servicio}.
 
                     </div>
 
+                `;
 
-                    <div class="card-body">
+            }
 
-                        <div class="table-responsive">
 
-                            <table class="table table-striped table-hover">
+            formularioServicio.reset();
 
-                                <thead>
+        }
 
-                                    <tr>
+    );
 
-                                        <th>ID</th>
+}
 
-                                        <th>Producto</th>
 
-                                        <th>Categoría</th>
+// ==========================================================
+// INICIALIZACIÓN
+// ==========================================================
 
-                                        <th>Precio</th>
+mostrarServicios();
 
-                                        <th>Stock</th>
+mostrarProductos();
 
-                                        <th>Estado</th>
-
-                                        <th>Acción</th>
-
-                                    </tr>
-
-                                </thead>
-
-
-                                <tbody id="tablaProductos">
-
-                                </tbody>
-
-                            </table>
-
-                        </div>
-
-
-                        <div
-                            id="sinProductos"
-                            class="alert alert-secondary text-center">
-
-                            No existen productos registrados.
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- =================================================
-             INFORMACIÓN DE PERSISTENCIA
-        ================================================== -->
-
-        <div class="alert alert-info mt-4">
-
-            <h5>
-                Persistencia de datos
-            </h5>
-
-            <p class="mb-0">
-
-                Los productos registrados se almacenan
-                utilizando <strong>localStorage</strong>.
-                Por esta razón, los datos permanecen
-                disponibles al recargar la página en el
-                mismo navegador.
-
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         REGISTRO / CONTACTO
-    ====================================================== -->
-
-    <section
-        id="registro"
-        class="container py-5">
-
-        <div class="row justify-content-center">
-
-            <div class="col-lg-8">
-
-                <div class="card shadow">
-
-                    <div class="card-body p-4">
-
-                        <h2 class="text-center mb-4">
-                            Solicitar un Servicio
-                        </h2>
-
-                        <form id="formServicio">
-
-                            <!-- Nombre -->
-
-                            <div class="mb-3">
-
-                                <label
-                                    for="nombre"
-                                    class="form-label">
-
-                                    Nombre completo
-
-                                </label>
-
-                                <input
-                                    type="text"
-                                    id="nombre"
-                                    name="nombre"
-                                    class="form-control"
-                                    placeholder="Ingrese su nombre"
-                                    required>
-
-                            </div>
-
-
-                            <!-- Correo -->
-
-                            <div class="mb-3">
-
-                                <label
-                                    for="correo"
-                                    class="form-label">
-
-                                    Correo electrónico
-
-                                </label>
-
-                                <input
-                                    type="email"
-                                    id="correo"
-                                    name="correo"
-                                    class="form-control"
-                                    placeholder="ejemplo@correo.com"
-                                    required>
-
-                            </div>
-
-
-                            <!-- Servicio -->
-
-                            <div class="mb-3">
-
-                                <label
-                                    for="servicio"
-                                    class="form-label">
-
-                                    Servicio solicitado
-
-                                </label>
-
-                                <select
-                                    id="servicio"
-                                    name="servicio"
-                                    class="form-select"
-                                    required>
-
-                                    <option value="">
-                                        Seleccione un servicio
-                                    </option>
-
-                                    <option value="Desarrollo Web">
-                                        Desarrollo Web
-                                    </option>
-
-                                    <option value="Soporte Técnico">
-                                        Soporte Técnico
-                                    </option>
-
-                                    <option value="Capacitación">
-                                        Capacitación
-                                    </option>
-
-                                    <option value="Consultoría">
-                                        Consultoría
-                                    </option>
-
-                                </select>
-
-                            </div>
-
-
-                            <!-- Mensaje -->
-
-                            <div class="mb-3">
-
-                                <label
-                                    for="detalleSolicitud"
-                                    class="form-label">
-
-                                    Mensaje
-
-                                </label>
-
-                                <textarea
-                                    id="detalleSolicitud"
-                                    name="mensaje"
-                                    class="form-control"
-                                    rows="4"
-                                    placeholder="Describa su solicitud"
-                                    required></textarea>
-
-                            </div>
-
-
-                            <div class="d-grid">
-
-                                <button
-                                    type="submit"
-                                    class="btn btn-primary btn-lg">
-
-                                    Enviar Solicitud
-
-                                </button>
-
-                            </div>
-
-                        </form>
-
-
-                        <!-- Mensaje de respuesta -->
-
-                        <div
-                            id="mensajeContacto"
-                            class="mt-3">
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         PIE DE PÁGINA
-    ====================================================== -->
-
-    <footer
-        class="bg-dark text-white text-center py-4 mt-5">
-
-        <div class="container">
-
-            <h5>
-                TecnoSoluciones
-            </h5>
-
-            <p>
-                Proyecto Integrador - Desarrollo de Aplicaciones Web
-            </p>
-
-            <p>
-                Soluciones tecnológicas para estudiantes,
-                emprendedores y empresas.
-            </p>
-
-            <p>
-                <strong>
-                    Avance 12/16 - Persistencia de datos
-                </strong>
-            </p>
-
-            <p class="mb-0">
-                © 2026 TecnoSoluciones. Todos los derechos reservados.
-            </p>
-
-        </div>
-
-    </footer>
-
-
-    <!-- =====================================================
-         BOOTSTRAP JAVASCRIPT
-    ====================================================== -->
-
-    <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-    </script>
-
-
-    <!-- =====================================================
-         JAVASCRIPT DEL PROYECTO
-    ====================================================== -->
-
-    <script src="static/js/script.js"></script>
-
-</body>
-
-</html>
-```
-
+actualizarSesion();
